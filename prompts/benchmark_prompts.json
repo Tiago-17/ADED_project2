@@ -1,0 +1,31 @@
+{
+  "prompts": [
+    {
+      "id": "short_baseline",
+      "category": "short",
+      "text": "What is the capital of France?",
+      "expected_tokens": 50,
+      "description": "Short prompt baseline test"
+    },
+    {
+      "id": "medium_reasoning",
+      "category": "medium",
+      "text": "Explain the key differences between machine learning and deep learning, and provide an example of each.",
+      "expected_tokens": 200,
+      "description": "Medium prompt reasoning test"
+    },
+    {
+      "id": "long_context",
+      "category": "long",
+      "text": "The transformer architecture, introduced in the paper 'Attention is All You Need', by Vaswani et al. in 2017, has become the foundation for most modern large language models. Unlike recurrent neural networks, wich process sequences sequentially, transformers process all tokens in parallel using self-attention mechanisms. This allows better parallelisation during training and has proven more effective at capturing long-range dependencies in text. When deploying transformers for inference on CPU, the main bottlenecks are the model's large memory footprint and the repeated loading of weights during the decoding phase. Based on this context, what are the main challenges when running large transformer models on CPU-only systems, and how might quantisation help address theses challenges?",   
+      "expected_tokens": 300,
+      "description": "Long prompt context awareness test"
+    }
+  ],
+  "generation_params": {
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "max_tokens": 512,
+    "repeat_penalty": 1.1
+  }
+}

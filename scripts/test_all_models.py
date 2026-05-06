@@ -1,23 +1,26 @@
-import os
 import requests
 import time
 
-URL = "http://localhost:8080/completion"
-MODELS_DIR = "models"
-models = [m for m in os.listdir(MODELS_DIR) if m.endswith(".gguf")]
-
 PROMPT = "What is the capital of Portugal?"
 
-for model in models:
+# Modelos com portas correspondentes
+models = {
+    "qwen2.5-0.5b": "http://localhost:8080/completion",
+    "tinyllama-1.1b": "http://localhost:8081/completion",
+    "meta-llama-3.1-8b": "http://localhost:8082/completion"
+}
+
+for model_name, url in models.items():
     print("\n" + "="*60)
-    print(f"Testing model: {model}")
+    print(f"Testing model: {model_name}")
+    print(f"URL: {url}")
     print("="*60)
 
     start = time.time()
 
     try:
         r = requests.post(
-            URL,
+            url,
             json={
                 "prompt": PROMPT,
                 "n_predict": 100,
