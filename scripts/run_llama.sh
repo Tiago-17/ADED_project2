@@ -7,12 +7,15 @@
 
 set -euo pipefail
 
+SCRIPT_DIR="${SLURM_SUBMIT_DIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)}"
+PROJECT_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+
 # Carrega toolchain consistente (compilador + assembler)
 module purge
 module load CMake
 module load binutils/2.45-GCCcore-15.2.0 || module load binutils
 
-cd llama.cpp
+cd "$PROJECT_ROOT/llama.cpp"
 
 # Compila com CMake
 echo "Building llama.cpp with CMake..."
