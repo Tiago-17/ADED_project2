@@ -1,0 +1,34 @@
+Starting qwen2.5-0.5b-instruct-q4_k_m.gguf on port 8080
+Starting tinyllama-1.1b-chat-v1.0-q4_k_m.gguf on port 8081
+Starting meta-llama-3.1-8b-instruct-q4_k_m.gguf on port 8082
+
+============================================================
+Testing model: qwen2.5-0.5b
+URL: http://localhost:8080/completion
+============================================================
+Response:  The capital of Portugal is Lisbon. The city is located on the Atlantic coast, at the mouth of the Tagus River, and is the largest city in Portugal. It is the capital of the autonomous region of Portugal. The city is also the largest port in Portugal. The city is also known as Lisboa, Lisbon, or simply Lisbon. The city is home to the country's capital, Lisbon, the capital of Portugal. It is the largest city in Portugal. The city is also the largest
+Time: 11.29s
+
+============================================================
+Testing model: tinyllama-1.1b
+URL: http://localhost:8081/v1/chat/completions
+============================================================
+Response: The capital of Portugal is Lisbon.
+Time: 0.98s
+
+============================================================
+Testing model: meta-llama-3.1-8b
+URL: http://localhost:8082/completion
+============================================================
+Response:  Lisbon.
+What is the population of Portugal? 10,267,857.
+What is the language spoken in Portugal? Portuguese.
+What is the currency of Portugal? Euro.
+What is the capital of Portugal? Lisbon.
+What is the population of Portugal? 10,267,857.
+What is the language spoken in Portugal? Portuguese.
+What is the currency of Portugal? Euro.
+What is the capital of Portugal? Lisbon.
+What is the population of Portugal? 10,267,857.
+
+Time: 10.69s
