@@ -1,31 +1,290 @@
 {
-  "prompts": [
-    {
-      "id": "short_baseline",
-      "category": "short",
-      "text": "What is the capital of France?",
-      "expected_tokens": 50,
-      "description": "Short prompt baseline test"
-    },
-    {
-      "id": "medium_reasoning",
-      "category": "medium",
-      "text": "Explain the key differences between machine learning and deep learning, and provide an example of each.",
-      "expected_tokens": 200,
-      "description": "Medium prompt reasoning test"
-    },
-    {
-      "id": "long_context",
-      "category": "long",
-      "text": "The transformer architecture, introduced in the paper 'Attention is All You Need', by Vaswani et al. in 2017, has become the foundation for most modern large language models. Unlike recurrent neural networks, wich process sequences sequentially, transformers process all tokens in parallel using self-attention mechanisms. This allows better parallelisation during training and has proven more effective at capturing long-range dependencies in text. When deploying transformers for inference on CPU, the main bottlenecks are the model's large memory footprint and the repeated loading of weights during the decoding phase. Based on this context, what are the main challenges when running large transformer models on CPU-only systems, and how might quantisation help address theses challenges?",   
-      "expected_tokens": 300,
-      "description": "Long prompt context awareness test"
-    }
-  ],
+  "metadata": {
+    "project": "LLM Inference Engine Benchmark - Track A1",
+    "engine": "llama.cpp",
+    "date_created": "2026-05-07",
+    "total_prompts": 33,
+    "mandatory_prompts_included": true
+  },
   "generation_params": {
     "temperature": 0.7,
     "top_p": 0.9,
+    "top_k": 40,
     "max_tokens": 512,
-    "repeat_penalty": 1.1
-  }
+    "repeat_penalty": 1.1,
+    "repeat_last_n": 64,
+    "seed": 42
+  },
+  "prompts": [
+    {
+      "id": "short_baseline_01",
+      "category": "short",
+      "text": "What is the capital of France?",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 7,
+      "description": "MANDATORY: Short prompt baseline test",
+      "mandatory": true
+    },
+    {
+      "id": "short_02",
+      "category": "short",
+      "text": "List three primary colors.",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 8,
+      "description": "Simple factual question",
+      "mandatory": false
+    },
+    {
+      "id": "short_03",
+      "category": "short",
+      "text": "What is the boiling point of water in Celsius?",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 12,
+      "description": "Basic science question",
+      "mandatory": false
+    },
+    {
+      "id": "short_04",
+      "category": "short",
+      "text": "Convert the following sentence to past tense: 'I am walking to the store.'",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 15,
+      "description": "Simple language task",
+      "mandatory": false
+    },
+    {
+      "id": "short_05",
+      "category": "short",
+      "text": "What is the square root of 144?",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 10,
+      "description": "Simple math question",
+      "mandatory": false
+    },
+    {
+      "id": "short_06",
+      "category": "short",
+      "text": "Name the planets in our solar system in order from the Sun.",
+      "expected_tokens": 80,
+      "estimated_input_tokens": 15,
+      "description": "List-based factual question",
+      "mandatory": false
+    },
+    {
+      "id": "short_07",
+      "category": "short",
+      "text": "What does CPU stand for in computing?",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 10,
+      "description": "Technical definition question",
+      "mandatory": false
+    },
+    {
+      "id": "short_08",
+      "category": "short",
+      "text": "Is Python a compiled or interpreted language?",
+      "expected_tokens": 60,
+      "estimated_input_tokens": 9,
+      "description": "Programming knowledge question",
+      "mandatory": false
+    },
+    {
+      "id": "short_09",
+      "category": "short",
+      "text": "What year did World War II end?",
+      "expected_tokens": 50,
+      "estimated_input_tokens": 8,
+      "description": "Historical fact question",
+      "mandatory": false
+    },
+    {
+      "id": "short_10",
+      "category": "short",
+      "text": "Define the term 'photosynthesis' in one sentence.",
+      "expected_tokens": 60,
+      "estimated_input_tokens": 12,
+      "description": "Definition task",
+      "mandatory": false
+    },
+    {
+      "id": "medium_reasoning_01",
+      "category": "medium",
+      "text": "Explain the key differences between machine learning and deep learning, and provide an example of each.",
+      "expected_tokens": 200,
+      "estimated_input_tokens": 22,
+      "description": "MANDATORY: Medium prompt reasoning test",
+      "mandatory": true
+    },
+    {
+      "id": "medium_02",
+      "category": "medium",
+      "text": "Compare and contrast TCP and UDP protocols. In what scenarios would you choose one over the other? Provide specific examples.",
+      "expected_tokens": 200,
+      "estimated_input_tokens": 28,
+      "description": "Technical comparison with reasoning",
+      "mandatory": false
+    },
+    {
+      "id": "medium_03",
+      "category": "medium",
+      "text": "A company is deciding between using a relational database and a NoSQL database for their new e-commerce platform. They expect to handle millions of users and need to store product catalogs, user profiles, and order histories. Based on these requirements, explain which type of database you would recommend and justify your choice with at least three reasons.",
+      "expected_tokens": 250,
+      "estimated_input_tokens": 62,
+      "description": "Scenario-based technical reasoning",
+      "mandatory": false
+    },
+    {
+      "id": "medium_04",
+      "category": "medium",
+      "text": "Explain the concept of gradient descent in machine learning. What is the difference between batch gradient descent, stochastic gradient descent, and mini-batch gradient descent?",
+      "expected_tokens": 200,
+      "estimated_input_tokens": 35,
+      "description": "ML concept explanation",
+      "mandatory": false
+    },
+    {
+      "id": "medium_05",
+      "category": "medium",
+      "text": "What are the main differences between REST and GraphQL APIs? Discuss the advantages and disadvantages of each approach, and provide examples of use cases where one might be preferred over the other.",
+      "expected_tokens": 220,
+      "estimated_input_tokens": 42,
+      "description": "API design comparison",
+      "mandatory": false
+    },
+    {
+      "id": "medium_06",
+      "category": "medium",
+      "text": "Describe the process of containerization using Docker. How does it differ from traditional virtual machines? Include the concepts of images, containers, and layers in your explanation.",
+      "expected_tokens": 200,
+      "estimated_input_tokens": 33,
+      "description": "DevOps concept explanation",
+      "mandatory": false
+    },
+    {
+      "id": "medium_07",
+      "category": "medium",
+      "text": "A software team is experiencing slow build times due to a monolithic codebase. They are considering migrating to a microservices architecture. Discuss the potential benefits and challenges of this migration. What factors should they consider before making this decision?",
+      "expected_tokens": 250,
+      "estimated_input_tokens": 48,
+      "description": "Software architecture scenario",
+      "mandatory": false
+    },
+    {
+      "id": "medium_08",
+      "category": "medium",
+      "text": "Explain how garbage collection works in programming languages like Java or Python. What are the different garbage collection strategies, and how do they impact application performance?",
+      "expected_tokens": 200,
+      "estimated_input_tokens": 30,
+      "description": "Systems programming concept",
+      "mandatory": false
+    },
+    {
+      "id": "medium_09",
+      "category": "medium",
+      "text": "Compare different sorting algorithms: quicksort, mergesort, and heapsort. Discuss their time complexity, space complexity, and stability. In which scenarios would each be the best choice?",
+      "expected_tokens": 250,
+      "estimated_input_tokens": 36,
+      "description": "Algorithm comparison",
+      "mandatory": false
+    },
+    {
+      "id": "medium_10",
+      "category": "medium",
+      "text": "What is the CAP theorem in distributed systems? Explain what each letter represents and why it's impossible to achieve all three guarantees simultaneously. Provide examples of databases that make different trade-offs.",
+      "expected_tokens": 220,
+      "estimated_input_tokens": 40,
+      "description": "Distributed systems theory",
+      "mandatory": false
+    },
+    {
+      "id": "long_context_01",
+      "category": "long",
+      "text": "The transformer architecture, introduced in the paper 'Attention is All You Need' by Vaswani et al. in 2017, has become the foundation for most modern large language models. Unlike recurrent neural networks, which process sequences sequentially, transformers process all tokens in parallel using self-attention mechanisms. This allows better parallelisation during training and has proven more effective at capturing long-range dependencies in text. When deploying transformers for inference on CPU, the main bottlenecks are the model's large memory footprint and the repeated loading of weights during the decoding phase. Based on this context, what are the main challenges when running large transformer models on CPU-only systems, and how might quantisation help address these challenges?",
+      "expected_tokens": 300,
+      "estimated_input_tokens": 120,
+      "description": "MANDATORY: Long prompt context awareness test",
+      "mandatory": true
+    },
+    {
+      "id": "long_02",
+      "category": "long",
+      "text": "Cloud computing has transformed how organizations deploy and scale applications. There are three main service models: Infrastructure as a Service (IaaS), Platform as a Service (PaaS), and Software as a Service (SaaS). IaaS provides virtualized computing resources over the internet, allowing users to provision servers, storage, and networking on demand. PaaS adds a layer of middleware and development tools, enabling developers to build applications without managing the underlying infrastructure. SaaS delivers fully functional applications to end users through a web browser. Each model involves different levels of abstraction and management responsibility. Organizations must also consider deployment models: public cloud, private cloud, hybrid cloud, and multi-cloud strategies. Public clouds offer cost efficiency and scalability but may raise security and compliance concerns. Private clouds provide greater control but require significant capital investment. Hybrid and multi-cloud approaches attempt to balance these trade-offs. Security remains a critical concern across all models, particularly regarding data sovereignty, encryption, and access management. Based on this context, analyze the key factors that influence an organization's choice of cloud service and deployment model, and discuss the main security challenges they must address.",
+      "expected_tokens": 350,
+      "estimated_input_tokens": 195,
+      "description": "Cloud computing analysis with context",
+      "mandatory": false
+    },
+    {
+      "id": "long_03",
+      "category": "long",
+      "text": "Modern software development has evolved significantly with the adoption of DevOps practices and Continuous Integration/Continuous Deployment (CI/CD) pipelines. DevOps breaks down silos between development and operations teams, fostering a culture of collaboration and shared responsibility. CI/CD automates the building, testing, and deployment of code changes, enabling faster and more reliable releases. Key practices include version control with Git, automated testing at multiple levels (unit, integration, end-to-end), containerization with Docker, and orchestration with Kubernetes. Monitoring and observability are essential components, utilizing tools like Prometheus, Grafana, and the ELK stack to track application performance and detect issues proactively. Infrastructure as Code (IaC) tools like Terraform and Ansible allow teams to manage infrastructure through version-controlled configuration files. However, implementing DevOps and CI/CD presents challenges: cultural resistance to change, the complexity of managing microservices, ensuring security throughout the pipeline (DevSecOps), and handling database migrations in automated deployments. Organizations must also determine appropriate branching strategies, manage secrets and environment-specific configurations, and establish effective rollback procedures for failed deployments. Based on this comprehensive overview, discuss the key technical and organizational challenges in implementing a robust CI/CD pipeline for a microservices-based application, and propose strategies to address these challenges effectively.",
+      "expected_tokens": 350,
+      "estimated_input_tokens": 220,
+      "description": "DevOps and CI/CD analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_04",
+      "category": "long",
+      "text": "The field of artificial intelligence has seen remarkable advances in natural language processing over the past decade. Traditional approaches relied on rule-based systems and statistical methods like n-grams and hidden Markov models. These methods struggled with context, ambiguity, and the compositional nature of language. The introduction of word embeddings, particularly Word2Vec and GloVe, represented a significant step forward by capturing semantic relationships in dense vector spaces. However, these static embeddings could not handle polysemy or context-dependent meaning. Recurrent neural networks and long short-term memory networks introduced the ability to process sequential information, but they remained computationally expensive and struggled with very long sequences due to vanishing gradient problems. The transformer architecture revolutionized the field by using self-attention mechanisms to process entire sequences in parallel, capturing relationships between all tokens regardless of distance. This architectural breakthrough enabled the training of increasingly large models, from BERT to GPT-3 and beyond. Today's large language models demonstrate remarkable capabilities in text generation, translation, summarization, and reasoning tasks. However, deploying these models in production environments presents significant engineering challenges. Model sizes have grown to hundreds of billions of parameters, requiring distributed computing infrastructure and specialized hardware. Inference latency, throughput, and cost are critical concerns for real-world applications. Techniques like model distillation, pruning, and quantization have become essential for making these models practical. Considering this evolution of NLP technologies from early statistical methods to modern transformer-based models, analyze the key technical breakthroughs that enabled each major advancement and discuss the current challenges and potential solutions for deploying state-of-the-art language models in production systems at scale.",
+      "expected_tokens": 380,
+      "estimated_input_tokens": 260,
+      "description": "NLP evolution analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_05",
+      "category": "long",
+      "text": "Cybersecurity has become one of the most critical challenges facing organizations in the digital age. The threat landscape is constantly evolving, with attackers employing increasingly sophisticated techniques to breach defenses. Common attack vectors include phishing, which exploits human psychology to gain unauthorized access; malware and ransomware, which can encrypt critical data and demand payment for its release; distributed denial-of-service attacks that overwhelm systems with traffic; and advanced persistent threats where attackers maintain long-term presence within networks. Defense strategies must employ a layered approach, often described as defense in depth. This includes network security measures like firewalls and intrusion detection systems; endpoint protection including antivirus and endpoint detection and response solutions; identity and access management with strong authentication and the principle of least privilege; data protection through encryption at rest and in transit; and security monitoring with security information and event management systems. The zero trust security model has gained prominence, operating on the principle of 'never trust, always verify' and requiring continuous authentication and authorization for all users and devices. Compliance with regulations like GDPR, HIPAA, and PCI-DSS adds additional requirements for data protection and breach notification. Incident response planning is essential, as no security program can prevent all attacks. Organizations must prepare for, detect, contain, eradicate, and recover from security incidents. The cybersecurity skills shortage makes it difficult for many organizations to build and maintain effective security programs. Based on this comprehensive overview of the cybersecurity landscape, discuss the key components of an effective enterprise security program and analyze the most significant challenges organizations face in implementing these components in today's threat environment.",
+      "expected_tokens": 400,
+      "estimated_input_tokens": 252,
+      "description": "Cybersecurity analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_06",
+      "category": "long",
+      "text": "Database systems have evolved significantly from the early hierarchical and network models to today's diverse ecosystem of specialized solutions. Relational databases, based on Codd's relational model, have dominated for decades due to their ACID guarantees, powerful query languages, and mature tooling. They excel at structured data with well-defined schemas and relationships, making them ideal for applications like financial systems where consistency is paramount. However, the rise of internet-scale applications exposed limitations in relational databases, particularly regarding horizontal scalability and flexible schemas. This led to the emergence of NoSQL databases, which sacrifice some ACID properties for improved scalability and flexibility. Key-value stores like Redis offer extremely fast access patterns at the cost of complex querying. Document databases like MongoDB store semi-structured data as JSON-like documents, providing schema flexibility while maintaining some query capabilities. Column-family stores like Cassandra optimize for write-heavy workloads and time-series data. Graph databases like Neo4j excel at traversing relationships, making them valuable for social networks and recommendation engines. More recently, NewSQL databases have attempted to combine ACID guarantees of relational systems with the horizontal scalability of NoSQL. The choice of database technology involves fundamental trade-offs captured by the CAP theorem, which states that distributed systems can only guarantee two of three properties: consistency, availability, and partition tolerance. In practice, systems must negotiate these trade-offs based on application requirements. With this understanding of the database landscape, analyze the key factors that should guide database technology selection for different application types, and discuss how organizations can manage the complexity of polyglot persistence strategies.",
+      "expected_tokens": 380,
+      "estimated_input_tokens": 242,
+      "description": "Database systems analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_07",
+      "category": "long",
+      "text": "The Internet of Things (IoT) represents a paradigm shift in how we interact with the physical world, connecting billions of devices from smart home appliances to industrial sensors. IoT architectures typically involve edge devices that collect data through sensors, gateway devices that aggregate and preprocess data locally, and cloud platforms that perform long-term storage and advanced analytics. Communication protocols like MQTT and CoAP are designed for the constraints of IoT devices, offering lightweight messaging with minimal overhead. The massive scale of IoT deployments introduces significant challenges in data management, as millions of devices generate continuous streams of sensor readings that must be ingested, processed, and analyzed in near real-time. Edge computing has emerged as a critical architectural pattern, processing data closer to its source to reduce latency and bandwidth requirements. This is particularly important for applications like autonomous vehicles or industrial control systems where latency cannot be tolerated. Security presents another major challenge, as IoT devices are often resource-constrained and cannot support traditional security mechanisms. Many IoT devices ship with default credentials and lack secure update mechanisms, making them attractive targets for botnets. Privacy concerns arise from the collection of personal data through smart home devices, wearables, and environmental sensors. Standards and interoperability remain fragmented, with competing protocols and vendor-specific solutions creating integration challenges. The convergence of IoT with artificial intelligence, particularly for predictive maintenance and anomaly detection, offers significant value but adds complexity. Considering these various dimensions of IoT systems, analyze the key architectural decisions and trade-offs in designing a scalable IoT platform for a smart city deployment that must handle heterogeneous devices, ensure security and privacy, and provide real-time analytics capabilities.",
+      "expected_tokens": 400,
+      "estimated_input_tokens": 258,
+      "description": "IoT architecture analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_08",
+      "category": "long",
+      "text": "Blockchain technology has generated significant interest since the introduction of Bitcoin in 2008, extending far beyond cryptocurrency applications. At its core, blockchain is a distributed ledger that maintains an immutable record of transactions through cryptographic hashing and consensus mechanisms. The decentralized nature of blockchain eliminates the need for trusted intermediaries, enabling peer-to-peer transactions with transparent audit trails. Consensus algorithms like Proof of Work, Proof of Stake, and Practical Byzantine Fault Tolerance provide different approaches to achieving agreement among participants, each with distinct trade-offs in terms of energy consumption, scalability, and decentralization. Smart contracts extend blockchain capabilities by enabling programmable logic that executes automatically when predefined conditions are met. Platforms like Ethereum have made smart contracts accessible to developers, spawning an ecosystem of decentralized applications. However, significant challenges remain. Scalability is a persistent issue, with major blockchain networks processing only a fraction of the transactions handled by traditional payment systems. Layer 2 solutions like state channels and sidechains attempt to address this by moving transactions off the main chain while maintaining security guarantees. Energy consumption, particularly for Proof of Work systems, has drawn criticism on environmental grounds. Interoperability between different blockchain networks remains limited, creating siloed ecosystems. Regulatory uncertainty poses risks for businesses building on blockchain, as legal frameworks struggle to keep pace with technological innovation. Despite these challenges, blockchain continues to find applications in supply chain management, digital identity, healthcare records, and decentralized finance. Based on this overview, analyze the key technical and business challenges facing enterprise blockchain adoption and evaluate the conditions under which blockchain provides meaningful advantages over traditional centralized databases.",
+      "expected_tokens": 380,
+      "estimated_input_tokens": 248,
+      "description": "Blockchain technology analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_09",
+      "category": "long",
+      "text": "Microservices architecture has become the dominant paradigm for building large-scale applications, offering benefits over traditional monolithic designs. In a microservices architecture, applications are decomposed into small, independent services that communicate through well-defined APIs. Each service is responsible for a specific business capability, can be developed and deployed independently, and can use its own technology stack and data store. This independence enables teams to work autonomously, accelerates development velocity, and allows components to scale independently based on demand. However, microservices introduce significant complexity. Distributed systems are inherently more difficult to reason about, with challenges including network latency, partial failures, and eventual consistency. Service discovery, load balancing, and circuit breaking become essential infrastructure concerns. Inter-service communication requires careful design: synchronous REST calls offer simplicity but can create tight coupling, while asynchronous messaging with message brokers like Kafka provides loose coupling at the cost of eventual consistency. Data management is particularly challenging, as the principle of database per service prevents direct data sharing and necessitates techniques like sagas for distributed transactions and CQRS for complex queries. Observability becomes critical: distributed tracing, centralized logging, and metrics collection are necessary to understand system behavior and troubleshoot issues. Containerization with Docker and orchestration with Kubernetes have become essential tools for managing microservices at scale, but they add their own learning curve and operational overhead. Testing microservices is more complex, requiring strategies for unit testing, integration testing, contract testing, and end-to-end testing. Based on this comprehensive overview, discuss the key technical challenges that organizations face when transitioning from monolithic to microservices architectures and analyze the circumstances under which a microservices approach is or is not appropriate.",
+      "expected_tokens": 380,
+      "estimated_input_tokens": 268,
+      "description": "Microservices architecture analysis",
+      "mandatory": false
+    },
+    {
+      "id": "long_10",
+      "category": "long",
+      "text": "High-performance computing has traditionally relied on specialized hardware and optimized software stacks to achieve maximum computational throughput. The landscape has evolved from vector processors and symmetric multiprocessing systems to today's GPU-accelerated clusters and emerging technologies like field-programmable gate arrays and application-specific integrated circuits for machine learning workloads. Parallel programming models such as MPI for distributed memory systems and OpenMP for shared memory systems remain foundational, but newer frameworks like CUDA and oneAPI are essential for accelerator programming. Memory hierarchies play a crucial role in performance, with careful management of cache levels, memory bandwidth, and data locality required to avoid bottlenecks. The von Neumann bottleneck, referring to the limited bandwidth between processor and memory, continues to constrain performance despite hardware advances. Compute intensity, measured as the ratio of floating-point operations to bytes transferred, is a key metric for understanding whether a workload is compute-bound or memory-bound. Profiling tools like perf, VTune, and NVIDIA Nsight help developers identify performance bottlenecks and guide optimization efforts. Benchmark suites like SPEC, LINPACK, and MLPerf provide standardized ways to measure and compare system performance. Energy efficiency has become a first-order concern in HPC system design, with power consumption limiting achievable compute density. Techniques like dynamic voltage and frequency scaling and power capping help manage energy consumption within thermal constraints. The convergence of HPC and AI workloads is driving new architectural innovations, including tensor cores and wafer-scale integration. Based on this overview, analyze the key factors that affect achievable performance in modern HPC systems and discuss strategies for optimizing data-intensive workloads given the constraints imposed by memory bandwidth and power limitations.",
+      "expected_tokens": 400,
+      "estimated_input_tokens": 250,
+      "description": "HPC systems analysis",
+      "mandatory": false
+    }
+  ]
 }
