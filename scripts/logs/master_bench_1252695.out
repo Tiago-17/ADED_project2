@@ -1,0 +1,269 @@
+=================================================
+Starting Master Benchmark Pipeline
+Project Root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+=================================================
+Loading modules...
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-threads-4 (Threads: 4)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-threads-4
+Server:       http://localhost:8080
+Threads:      4
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-threads-4 (4 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        5707.1          647.4           1.6             15.8         0.0         
+medium       11235.5         651.2           1.6             15.8         0.0         
+long         60716.0         679.5           1.5             15.0         0.0         
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-threads-4...
+✅ Finished llama-3.1-8b-threads-4
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-threads-8 (Threads: 8)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-threads-8
+Server:       http://localhost:8080
+Threads:      8
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-threads-8 (8 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        2869.2          329.3           3.1             18.0         0.0         
+medium       5637.9          332.6           3.0             17.4         0.0         
+long         30396.9         350.3           2.9             16.4         0.0         
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-threads-8...
+✅ Finished llama-3.1-8b-threads-8
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-threads-16 (Threads: 16)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-threads-16
+Server:       http://localhost:8080
+Threads:      16
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-threads-16 (16 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        1455.1          170.5           5.9             18.1         0.0         
+medium       2847.7          172.4           5.9             18.1         0.0         
+long         15960.6         182.0           5.6             18.1         0.0         
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-threads-16...
+✅ Finished llama-3.1-8b-threads-16
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-threads-32 (Threads: 32)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-threads-32
+Server:       http://localhost:8080
+Threads:      32
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-threads-32 (32 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        746.2           90.5            11.2            18.1         100.0       
+medium       1471.0          91.6            11.0            18.1         60.0        
+long         8440.2          97.1            10.4            18.1         56.7        
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-threads-32...
+✅ Finished llama-3.1-8b-threads-32
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-threads-48 (Threads: 48)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-threads-48
+Server:       http://localhost:8080
+Threads:      48
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-threads-48 (48 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        553.0           88.0            11.8            16.4         76.7        
+medium       1023.0          85.3            12.1            16.4         86.7        
+long         5560.8          98.2            10.7            15.5         43.3        
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-threads-48...
+✅ Finished llama-3.1-8b-threads-48
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: qwen2.5-0.5b (Threads: 16)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        qwen2.5-0.5b
+Server:       http://localhost:8080
+Threads:      16
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - qwen2.5-0.5b (16 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        176.2           25.9            39.1            664.6        100.0       
+medium       394.2           26.2            38.5            677.3        100.0       
+long         2202.4          28.2            35.8            692.9        66.7        
+===========================================================================
+
+Cleaning up processes for qwen2.5-0.5b...
+✅ Finished qwen2.5-0.5b
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: tinyllama-1.1b (Threads: 16)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        tinyllama-1.1b
+Server:       http://localhost:8080
+Threads:      16
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - tinyllama-1.1b (16 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        157.7           19.7            26.8            18.1         100.0       
+medium       369.3           22.6            29.4            18.1         100.0       
+long         3300.5          28.2            23.5            18.1         66.7        
+===========================================================================
+
+Cleaning up processes for tinyllama-1.1b...
+✅ Finished tinyllama-1.1b
+
+-------------------------------------------------
+🚀 RUNNING EXPERIMENT: llama-3.1-8b-Q8 (Threads: 16)
+-------------------------------------------------
+Starting server on port 8080...
+Waiting 20 seconds for server to load the model into memory...
+Server is healthy. Starting benchmark client...
+
+============================================================
+LLM Inference Benchmark - Track A1
+============================================================
+Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+Model:        llama-3.1-8b-Q8
+Server:       http://localhost:8080
+Threads:      16
+Trials:       3
+Max tokens:   512
+============================================================
+
+
+===========================================================================
+BENCHMARK SUMMARY - llama-3.1-8b-Q8 (16 threads)
+===========================================================================
+Category     TTFT(ms)        TPOT(ms)        Decode(t/s)     Memory(MB)   Goodput(%)  
+---------------------------------------------------------------------------------
+short        545.2           88.5            11.4            18.1         100.0       
+medium       1075.8          90.4            11.2            18.1         93.3        
+long         7243.6          99.7            10.1            18.1         43.3        
+===========================================================================
+
+Cleaning up processes for llama-3.1-8b-Q8...
+✅ Finished llama-3.1-8b-Q8
+
+=================================================
+📊 GENERATING PLOTS AND PERFORMANCE MODEL
+=================================================
+=================================================
+🎉 ALL BENCHMARKS AND PLOTS COMPLETE! 🎉
+Check the results/plots/ directory for your graphs.
+=================================================

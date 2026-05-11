@@ -1,0 +1,123 @@
+2026-05-11 18:28:17,287 - INFO - Logging to: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/logs/benchmark_llama-3.1-8b-threads-48_20260511_182817.log
+2026-05-11 18:28:17,289 - INFO - Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+2026-05-11 18:28:17,290 - INFO - Model: llama-3.1-8b-threads-48
+2026-05-11 18:28:17,290 - INFO - Threads: 48
+2026-05-11 18:28:17,290 - INFO - Loaded 30 prompts
+2026-05-11 18:28:20,598 - INFO - Checking server health at http://localhost:8080/health...
+2026-05-11 18:28:20,621 - INFO - ✓ Server is healthy and ready
+2026-05-11 18:28:20,622 - INFO - Running warmup...
+2026-05-11 18:28:20,622 - INFO - Warmup 1/3
+2026-05-11 18:28:29,752 - INFO - ✓ warmup_0: TTFT=390.97ms, TPOT=84.79ms, Tokens=100
+2026-05-11 18:28:30,053 - INFO - Warmup 2/3
+2026-05-11 18:28:39,656 - INFO - ✓ warmup_1: TTFT=468.2ms, TPOT=89.62ms, Tokens=100
+2026-05-11 18:28:39,957 - INFO - Warmup 3/3
+2026-05-11 18:28:49,105 - INFO - ✓ warmup_2: TTFT=519.89ms, TPOT=84.5ms, Tokens=100
+2026-05-11 18:28:49,406 - INFO - Warmup complete
+
+2026-05-11 18:28:49,406 - INFO - ============================================================
+2026-05-11 18:28:49,407 - INFO - BENCHMARK: llama-3.1-8b-threads-48 (3 trials)
+2026-05-11 18:28:49,407 - INFO - ============================================================
+
+2026-05-11 18:28:49,669 - INFO - Memory before benchmark: 18.1 MB RSS
+2026-05-11 18:28:49,670 - INFO - 
+--- Trial 1/3 ---
+2026-05-11 18:28:57,696 - INFO - ✓ short_baseline_01: TTFT=392.52ms, TPOT=74.44ms, Tokens=100
+2026-05-11 18:29:11,433 - INFO - ✓ short_02: TTFT=291.65ms, TPOT=130.13ms, Tokens=100
+2026-05-11 18:29:19,862 - INFO - ✓ short_03: TTFT=591.75ms, TPOT=73.46ms, Tokens=100
+2026-05-11 18:29:28,154 - INFO - ✓ short_04: TTFT=860.55ms, TPOT=69.37ms, Tokens=100
+2026-05-11 18:29:37,340 - INFO - ✓ short_05: TTFT=540.33ms, TPOT=81.63ms, Tokens=100
+2026-05-11 18:29:45,964 - INFO - ✓ short_06: TTFT=740.51ms, TPOT=73.94ms, Tokens=100
+2026-05-11 18:29:56,946 - INFO - ✓ short_07: TTFT=441.77ms, TPOT=100.78ms, Tokens=100
+2026-05-11 18:30:08,449 - INFO - ✓ short_08: TTFT=445.01ms, TPOT=105.98ms, Tokens=100
+2026-05-11 18:30:17,268 - INFO - ✓ short_09: TTFT=440.85ms, TPOT=78.93ms, Tokens=100
+2026-05-11 18:30:26,952 - INFO - ✓ short_10: TTFT=641.57ms, TPOT=85.57ms, Tokens=100
+2026-05-11 18:30:36,416 - INFO - ✓ medium_reasoning_01: TTFT=1003.82ms, TPOT=79.77ms, Tokens=100
+2026-05-11 18:30:47,072 - INFO - ✓ medium_02: TTFT=1196.63ms, TPOT=89.88ms, Tokens=100
+2026-05-11 18:30:59,394 - INFO - ✓ medium_03: TTFT=4139.03ms, TPOT=76.98ms, Tokens=100
+2026-05-11 18:31:09,029 - INFO - ✓ medium_04: TTFT=1622.31ms, TPOT=75.25ms, Tokens=100
+2026-05-11 18:31:19,007 - INFO - ✓ medium_05: TTFT=1770.22ms, TPOT=77.21ms, Tokens=100
+2026-05-11 18:31:30,206 - INFO - ✓ medium_06: TTFT=1625.58ms, TPOT=91.02ms, Tokens=100
+2026-05-11 18:31:40,535 - INFO - ✓ medium_07: TTFT=2284.94ms, TPOT=75.46ms, Tokens=100
+2026-05-11 18:31:49,782 - INFO - ✓ medium_08: TTFT=1530.91ms, TPOT=72.16ms, Tokens=100
+2026-05-11 18:31:59,173 - INFO - ✓ medium_09: TTFT=1822.99ms, TPOT=70.65ms, Tokens=100
+2026-05-11 18:32:11,391 - INFO - ✓ medium_10: TTFT=1812.14ms, TPOT=99.34ms, Tokens=100
+2026-05-11 18:32:37,875 - INFO - ✓ long_context_01: TTFT=8497.38ms, TPOT=175.86ms, Tokens=100
+2026-05-11 18:33:06,404 - INFO - ✓ long_02: TTFT=13100.89ms, TPOT=150.12ms, Tokens=100
+2026-05-11 18:33:29,168 - INFO - ✓ long_03: TTFT=14894.75ms, TPOT=73.64ms, Tokens=100
+2026-05-11 18:33:59,260 - INFO - ✓ long_04: TTFT=18612.79ms, TPOT=110.11ms, Tokens=100
+2026-05-11 18:34:26,517 - INFO - ✓ long_05: TTFT=17586.48ms, TPOT=91.83ms, Tokens=100
+2026-05-11 18:34:53,344 - INFO - ✓ long_06: TTFT=17687.35ms, TPOT=86.56ms, Tokens=100
+2026-05-11 18:35:19,392 - INFO - ✓ long_07: TTFT=17996.59ms, TPOT=75.57ms, Tokens=100
+2026-05-11 18:35:47,143 - INFO - ✓ long_08: TTFT=17834.65ms, TPOT=94.41ms, Tokens=100
+2026-05-11 18:36:14,667 - INFO - ✓ long_09: TTFT=18914.45ms, TPOT=81.19ms, Tokens=100
+2026-05-11 18:36:42,216 - INFO - ✓ long_10: TTFT=18914.45ms, TPOT=81.46ms, Tokens=100
+2026-05-11 18:36:42,535 - INFO - Trial 1 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48/trial_1.json
+2026-05-11 18:36:42,535 - INFO - 
+--- Trial 2/3 ---
+2026-05-11 18:36:50,263 - INFO - ✓ short_baseline_01: TTFT=425.08ms, TPOT=71.03ms, Tokens=100
+2026-05-11 18:37:00,469 - INFO - ✓ short_02: TTFT=326.66ms, TPOT=94.01ms, Tokens=100
+2026-05-11 18:37:11,235 - INFO - ✓ short_03: TTFT=861.04ms, TPOT=94.29ms, Tokens=100
+2026-05-11 18:37:20,140 - INFO - ✓ short_04: TTFT=882.95ms, TPOT=75.29ms, Tokens=100
+2026-05-11 18:37:30,277 - INFO - ✓ short_05: TTFT=557.01ms, TPOT=91.03ms, Tokens=100
+2026-05-11 18:37:42,156 - INFO - ✓ short_06: TTFT=747.37ms, TPOT=106.68ms, Tokens=100
+2026-05-11 18:37:50,113 - INFO - ✓ short_07: TTFT=442.47ms, TPOT=70.2ms, Tokens=100
+2026-05-11 18:37:58,621 - INFO - ✓ short_08: TTFT=459.69ms, TPOT=75.59ms, Tokens=100
+2026-05-11 18:38:07,797 - INFO - ✓ short_09: TTFT=441.09ms, TPOT=82.52ms, Tokens=100
+2026-05-11 18:38:16,009 - INFO - ✓ short_10: TTFT=641.65ms, TPOT=70.77ms, Tokens=100
+2026-05-11 18:38:25,452 - INFO - ✓ medium_reasoning_01: TTFT=1004.49ms, TPOT=79.54ms, Tokens=100
+2026-05-11 18:38:37,928 - INFO - ✓ medium_02: TTFT=1197.51ms, TPOT=108.23ms, Tokens=100
+2026-05-11 18:38:45,724 - INFO - ✓ medium_03: TTFT=116.44ms, TPOT=71.86ms, Tokens=100
+2026-05-11 18:38:57,690 - INFO - ✓ medium_04: TTFT=1614.74ms, TPOT=98.88ms, Tokens=100
+2026-05-11 18:39:05,494 - INFO - ✓ medium_05: TTFT=93.85ms, TPOT=72.2ms, Tokens=100
+2026-05-11 18:39:15,360 - INFO - ✓ medium_06: TTFT=94.29ms, TPOT=93.0ms, Tokens=100
+2026-05-11 18:39:28,370 - INFO - ✓ medium_07: TTFT=94.93ms, TPOT=124.76ms, Tokens=100
+2026-05-11 18:39:38,881 - INFO - ✓ medium_08: TTFT=1532.92ms, TPOT=84.96ms, Tokens=100
+2026-05-11 18:39:47,602 - INFO - ✓ medium_09: TTFT=94.39ms, TPOT=81.39ms, Tokens=100
+2026-05-11 18:39:57,107 - INFO - ✓ medium_10: TTFT=99.11ms, TPOT=89.26ms, Tokens=100
+2026-05-11 18:40:09,389 - INFO - ✓ long_context_01: TTFT=103.54ms, TPOT=117.27ms, Tokens=100
+2026-05-11 18:40:19,069 - INFO - ✓ long_02: TTFT=108.82ms, TPOT=91.03ms, Tokens=100
+2026-05-11 18:40:31,153 - INFO - ✓ long_03: TTFT=116.41ms, TPOT=115.24ms, Tokens=100
+2026-05-11 18:40:39,716 - INFO - ✓ long_04: TTFT=118.93ms, TPOT=79.65ms, Tokens=100
+2026-05-11 18:40:49,462 - INFO - ✓ long_05: TTFT=556.41ms, TPOT=87.18ms, Tokens=100
+2026-05-11 18:40:58,313 - INFO - ✓ long_06: TTFT=118.54ms, TPOT=82.57ms, Tokens=100
+2026-05-11 18:41:07,289 - INFO - ✓ long_07: TTFT=120.14ms, TPOT=83.81ms, Tokens=100
+2026-05-11 18:41:16,284 - INFO - ✓ long_08: TTFT=120.08ms, TPOT=84.01ms, Tokens=100
+2026-05-11 18:41:28,894 - INFO - ✓ long_09: TTFT=120.84ms, TPOT=120.53ms, Tokens=100
+2026-05-11 18:41:39,478 - INFO - ✓ long_10: TTFT=121.2ms, TPOT=99.92ms, Tokens=100
+2026-05-11 18:41:39,808 - INFO - Trial 2 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48/trial_2.json
+2026-05-11 18:41:39,809 - INFO - 
+--- Trial 3/3 ---
+2026-05-11 18:41:51,809 - INFO - ✓ short_baseline_01: TTFT=403.18ms, TPOT=114.34ms, Tokens=100
+2026-05-11 18:42:01,348 - INFO - ✓ short_02: TTFT=292.26ms, TPOT=87.57ms, Tokens=100
+2026-05-11 18:42:13,035 - INFO - ✓ short_03: TTFT=597.47ms, TPOT=106.19ms, Tokens=100
+2026-05-11 18:42:24,349 - INFO - ✓ short_04: TTFT=858.84ms, TPOT=99.94ms, Tokens=100
+2026-05-11 18:42:33,512 - INFO - ✓ short_05: TTFT=541.42ms, TPOT=81.39ms, Tokens=100
+2026-05-11 18:42:41,811 - INFO - ✓ short_06: TTFT=740.2ms, TPOT=70.65ms, Tokens=100
+2026-05-11 18:42:50,810 - INFO - ✓ short_07: TTFT=458.4ms, TPOT=80.58ms, Tokens=100
+2026-05-11 18:43:03,950 - INFO - ✓ short_08: TTFT=443.96ms, TPOT=122.54ms, Tokens=100
+2026-05-11 18:43:12,263 - INFO - ✓ short_09: TTFT=441.41ms, TPOT=73.82ms, Tokens=100
+2026-05-11 18:43:23,109 - INFO - ✓ short_10: TTFT=642.41ms, TPOT=97.3ms, Tokens=100
+2026-05-11 18:43:34,241 - INFO - ✓ medium_reasoning_01: TTFT=1015.44ms, TPOT=96.36ms, Tokens=100
+2026-05-11 18:43:43,194 - INFO - ✓ medium_02: TTFT=1200.79ms, TPOT=72.47ms, Tokens=100
+2026-05-11 18:43:51,948 - INFO - ✓ medium_03: TTFT=103.75ms, TPOT=81.54ms, Tokens=100
+2026-05-11 18:44:02,571 - INFO - ✓ medium_04: TTFT=1588.46ms, TPOT=85.51ms, Tokens=100
+2026-05-11 18:44:13,029 - INFO - ✓ medium_05: TTFT=119.77ms, TPOT=98.68ms, Tokens=100
+2026-05-11 18:44:23,223 - INFO - ✓ medium_06: TTFT=92.45ms, TPOT=96.27ms, Tokens=100
+2026-05-11 18:44:31,091 - INFO - ✓ medium_07: TTFT=94.97ms, TPOT=72.76ms, Tokens=100
+2026-05-11 18:44:41,739 - INFO - ✓ medium_08: TTFT=1533.8ms, TPOT=86.31ms, Tokens=100
+2026-05-11 18:44:50,314 - INFO - ✓ medium_09: TTFT=95.71ms, TPOT=79.85ms, Tokens=100
+2026-05-11 18:44:58,777 - INFO - ✓ medium_10: TTFT=93.59ms, TPOT=78.78ms, Tokens=100
+2026-05-11 18:45:09,547 - INFO - ✓ long_context_01: TTFT=95.85ms, TPOT=102.08ms, Tokens=100
+2026-05-11 18:45:17,730 - INFO - ✓ long_02: TTFT=113.3ms, TPOT=75.76ms, Tokens=100
+2026-05-11 18:45:26,317 - INFO - ✓ long_03: TTFT=116.87ms, TPOT=79.82ms, Tokens=100
+2026-05-11 18:45:38,487 - INFO - ✓ long_04: TTFT=124.03ms, TPOT=115.99ms, Tokens=100
+2026-05-11 18:45:49,088 - INFO - ✓ long_05: TTFT=122.24ms, TPOT=100.21ms, Tokens=100
+2026-05-11 18:45:59,331 - INFO - ✓ long_06: TTFT=122.37ms, TPOT=96.58ms, Tokens=100
+2026-05-11 18:46:08,720 - INFO - ✓ long_07: TTFT=119.79ms, TPOT=87.84ms, Tokens=100
+2026-05-11 18:46:18,225 - INFO - ✓ long_08: TTFT=123.1ms, TPOT=89.0ms, Tokens=100
+2026-05-11 18:46:28,221 - INFO - ✓ long_09: TTFT=120.54ms, TPOT=93.97ms, Tokens=100
+2026-05-11 18:46:41,176 - INFO - ✓ long_10: TTFT=122.5ms, TPOT=123.89ms, Tokens=100
+2026-05-11 18:46:41,492 - INFO - Trial 3 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48/trial_3.json
+2026-05-11 18:46:42,119 - INFO - Statistics saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48/statistics.json and /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48/statistics.csv
+2026-05-11 18:46:42,121 - INFO - 
+✓ Benchmark complete. Results in: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/llama-3.1-8b-threads-48

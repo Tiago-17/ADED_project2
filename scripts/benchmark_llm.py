@@ -17,6 +17,7 @@ import csv
 import psutil
 import requests
 import statistics
+import mlflow
 from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional
@@ -35,14 +36,6 @@ class LLMBenchmark:
                  temperature: float = 0.7):
         """
         Initialize benchmark configuration.
-        
-        Args:
-            model_name: Name of the model being tested (e.g., 'llama-3.1-8b')
-            project_root: Root directory of the project
-            server_url: URL of the llama.cpp server
-            num_threads: Number of CPU threads used by server
-            max_tokens: Maximum tokens to generate
-            temperature: Sampling temperature
         """
         self.model_name = model_name
         self.project_root = Path(project_root).resolve()
@@ -206,15 +199,7 @@ class LLMBenchmark:
         return memory_info
     
     def run_completion(self, prompt: Dict) -> Dict:
-        """
-        Run a single completion request and measure performance.
-        
-        Args:
-            prompt: Prompt dictionary
-        
-        Returns:
-            Metrics dictionary
-        """
+        """Run a single completion request and measure performance."""
         prompt_id = prompt.get('id', 'unknown')
         prompt_text = prompt.get('text', '')
         category = prompt.get('category', 'unknown')
@@ -426,7 +411,10 @@ class LLMBenchmark:
         for r in self.results:
             if not r.get('error'):
                 grouped[r['prompt_id']].append(r)
-        
+
+        SLA_TTFT_MS = 2000  # Example: 2 seconds
+        SLA_TPOT_MS = 100   # Example: 100 ms per token
+                
         # Compute statistics per prompt
         stats = []
         for prompt_id, results in grouped.items():
@@ -435,6 +423,9 @@ class LLMBenchmark:
             
             cat = results[0]['category']
             mandatory = results[0].get('mandatory', False)
+            
+            goodput_count = sum(1 for r in results if r['ttft_ms'] < SLA_TTFT_MS and r['tpot_avg_ms'] < SLA_TPOT_MS)
+            goodput_percentage = round((goodput_count / len(results)) * 100, 2)
             
             # Extract values
             ttft_vals = [r['ttft_ms'] for r in results if r['ttft_ms'] > 0]
@@ -456,6 +447,7 @@ class LLMBenchmark:
                 'decode_tps_std': round(statistics.stdev(decode_vals), 2) if len(decode_vals) > 1 else 0,
                 'memory_mb_mean': round(statistics.mean(mem_vals), 2) if mem_vals else 0,
                 'output_tokens_mean': round(statistics.mean(tokens_vals), 0),
+                'goodput_percent': goodput_percentage,
             }
             stats.append(stat)
         
@@ -472,7 +464,7 @@ class LLMBenchmark:
                 'ttft_mean_ms', 'ttft_std_ms',
                 'tpot_mean_ms', 'tpot_std_ms',
                 'decode_tps_mean', 'decode_tps_std',
-                'memory_mb_mean', 'output_tokens_mean'
+                'memory_mb_mean', 'output_tokens_mean', 'goodput_percent'
             ]
             with open(csv_file, 'w', newline='') as f:
                 writer = csv.DictWriter(f, fieldnames=fieldnames, extrasaction='ignore')
@@ -485,7 +477,7 @@ class LLMBenchmark:
         self.logger.info(f"Statistics saved to {stats_file} and {csv_file}")
     
     def _print_summary(self, stats: List[Dict]):
-        """Print formatted summary."""
+        """Print formatted summary and log to MLflow."""
         from collections import defaultdict
         
         by_category = defaultdict(list)
@@ -495,8 +487,8 @@ class LLMBenchmark:
         print(f"\n{'='*75}")
         print(f"BENCHMARK SUMMARY - {self.model_name} ({self.num_threads} threads)")
         print(f"{'='*75}")
-        print(f"{'Category':<12} {'TTFT(ms)':<15} {'TPOT(ms)':<15} {'Decode(t/s)':<15} {'Memory(MB)':<12}")
-        print("-" * 69)
+        print(f"{'Category':<12} {'TTFT(ms)':<15} {'TPOT(ms)':<15} {'Decode(t/s)':<15} {'Memory(MB)':<12} {'Goodput(%)':<12}")
+        print("-" * 81)
         
         for cat in ['short', 'medium', 'long']:
             if cat in by_category:
@@ -505,9 +497,21 @@ class LLMBenchmark:
                 tpot = statistics.mean([s['tpot_mean_ms'] for s in items])
                 decode = statistics.mean([s['decode_tps_mean'] for s in items])
                 mem = statistics.mean([s['memory_mb_mean'] for s in items])
-                print(f"{cat:<12} {ttft:<15.1f} {tpot:<15.1f} {decode:<15.1f} {mem:<12.1f}")
+                goodput = statistics.mean([s['goodput_percent'] for s in items])
+                print(f"{cat:<12} {ttft:<15.1f} {tpot:<15.1f} {decode:<15.1f} {mem:<12.1f} {goodput:<12.1f}")
+                
+                # --- MLflow Logging ---
+                if mlflow.active_run():
+                    mlflow.log_metric(f"{cat}_avg_ttft_ms", ttft)
+                    mlflow.log_metric(f"{cat}_avg_tpot_ms", tpot)
+                    mlflow.log_metric(f"{cat}_avg_decode_tps", decode)
+                    mlflow.log_metric(f"{cat}_avg_memory_mb", mem)
+                    mlflow.log_metric(f"{cat}_avg_goodput_percent", goodput)
         
         print(f"{'='*75}\n")
+        
+        if mlflow.active_run():
+            mlflow.log_artifacts(str(self.results_dir), artifact_path="raw_data")
 
 
 def main():
@@ -569,7 +573,7 @@ Examples:
     print(f"Max tokens:   {args.max_tokens}")
     print(f"{'='*60}\n")
     
-    # Create and run benchmark
+    # Create benchmark instance
     benchmark = LLMBenchmark(
         model_name=args.model,
         project_root=str(project_root),
@@ -579,29 +583,49 @@ Examples:
         temperature=args.temperature
     )
     
-    # Check server
-    if not benchmark.check_server_health():
-        print("\nERROR: llama.cpp server is not running!")
-        print(f"Start it with: llama-server -m models/<model>.gguf -c 4096 -t {args.threads}")
-        sys.exit(1)
+    # -----------------------------------------------------------------
+    # MLflow Setup
+    # -----------------------------------------------------------------
+    db_path = project_root / "llm_benchmarks.db"
+    mlflow.set_tracking_uri(f"sqlite:///{db_path}")
+    mlflow.set_experiment("Track_A1_LLM_Benchmarks")
     
-    # Warmup
-    if not args.no_warmup:
-        benchmark.run_warmup()
+    run_name = f"{args.model}_{args.threads}threads"
     
-    # Run benchmark
-    try:
-        benchmark.run_benchmark(num_trials=args.trials)
-    except KeyboardInterrupt:
-        print("\nInterrupted. Saving partial results...")
-        if benchmark.results:
-            benchmark._compute_statistics()
-        sys.exit(0)
-    except Exception as e:
-        print(f"\nFATAL ERROR: {e}")
-        import traceback
-        traceback.print_exc()
-        sys.exit(1)
+    with mlflow.start_run(run_name=run_name):
+        
+        # Log basic configuration to MLflow
+        mlflow.log_params({
+            "model_name": args.model,
+            "threads": args.threads,
+            "trials": args.trials,
+            "max_tokens": args.max_tokens,
+            "temperature": args.temperature
+        })
+
+        # Check server
+        if not benchmark.check_server_health():
+            print("\nERROR: llama.cpp server is not running!")
+            print(f"Start it with: llama-server -m models/<model>.gguf -c 4096 -t {args.threads}")
+            sys.exit(1)
+        
+        # Warmup
+        if not args.no_warmup:
+            benchmark.run_warmup()
+        
+        # Run benchmark
+        try:
+            benchmark.run_benchmark(num_trials=args.trials)
+        except KeyboardInterrupt:
+            print("\nInterrupted. Saving partial results...")
+            if benchmark.results:
+                benchmark._compute_statistics()
+            sys.exit(0)
+        except Exception as e:
+            print(f"\nFATAL ERROR: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(1)
 
 
 if __name__ == '__main__':

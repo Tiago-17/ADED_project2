@@ -1,0 +1,123 @@
+2026-05-11 18:54:20,137 - INFO - Logging to: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/logs/benchmark_tinyllama-1.1b_20260511_185420.log
+2026-05-11 18:54:20,139 - INFO - Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+2026-05-11 18:54:20,140 - INFO - Model: tinyllama-1.1b
+2026-05-11 18:54:20,140 - INFO - Threads: 16
+2026-05-11 18:54:20,140 - INFO - Loaded 30 prompts
+2026-05-11 18:54:23,461 - INFO - Checking server health at http://localhost:8080/health...
+2026-05-11 18:54:23,483 - INFO - ✓ Server is healthy and ready
+2026-05-11 18:54:23,483 - INFO - Running warmup...
+2026-05-11 18:54:23,484 - INFO - Warmup 1/3
+2026-05-11 18:54:26,782 - INFO - ✓ warmup_0: TTFT=161.99ms, TPOT=28.23ms, Tokens=100
+2026-05-11 18:54:27,083 - INFO - Warmup 2/3
+2026-05-11 18:54:27,506 - INFO - ✓ warmup_1: TTFT=163.33ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:27,807 - INFO - Warmup 3/3
+2026-05-11 18:54:31,030 - INFO - ✓ warmup_2: TTFT=161.32ms, TPOT=28.3ms, Tokens=100
+2026-05-11 18:54:31,331 - INFO - Warmup complete
+
+2026-05-11 18:54:31,332 - INFO - ============================================================
+2026-05-11 18:54:31,332 - INFO - BENCHMARK: tinyllama-1.1b (3 trials)
+2026-05-11 18:54:31,332 - INFO - ============================================================
+
+2026-05-11 18:54:31,592 - INFO - Memory before benchmark: 18.1 MB RSS
+2026-05-11 18:54:31,592 - INFO - 
+--- Trial 1/3 ---
+2026-05-11 18:54:32,060 - INFO - ✓ short_baseline_01: TTFT=124.52ms, TPOT=27.96ms, Tokens=4
+2026-05-11 18:54:32,744 - INFO - ✓ short_02: TTFT=123.11ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:34,398 - INFO - ✓ short_03: TTFT=222.89ms, TPOT=28.04ms, Tokens=32
+2026-05-11 18:54:35,342 - INFO - ✓ short_04: TTFT=383.68ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:36,164 - INFO - ✓ short_05: TTFT=261.64ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:37,579 - INFO - ✓ short_06: TTFT=320.56ms, TPOT=28.04ms, Tokens=20
+2026-05-11 18:54:38,323 - INFO - ✓ short_07: TTFT=182.5ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:39,082 - INFO - ✓ short_08: TTFT=181.31ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:40,960 - INFO - ✓ short_09: TTFT=181.46ms, TPOT=28.04ms, Tokens=41
+2026-05-11 18:54:41,834 - INFO - ✓ short_10: TTFT=301.66ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:45,648 - INFO - ✓ medium_reasoning_01: TTFT=422.61ms, TPOT=28.46ms, Tokens=100
+2026-05-11 18:54:46,807 - INFO - ✓ medium_02: TTFT=583.21ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:51,235 - INFO - ✓ medium_03: TTFT=1932.99ms, TPOT=28.8ms, Tokens=68
+2026-05-11 18:54:53,203 - INFO - ✓ medium_04: TTFT=684.55ms, TPOT=28.22ms, Tokens=26
+2026-05-11 18:54:54,604 - INFO - ✓ medium_05: TTFT=824.38ms, TPOT=0ms, Tokens=1
+2026-05-11 18:54:56,613 - INFO - ✓ medium_06: TTFT=724.19ms, TPOT=28.24ms, Tokens=26
+2026-05-11 18:54:58,279 - INFO - ✓ medium_07: TTFT=1087.66ms, TPOT=0ms, Tokens=1
+2026-05-11 18:55:00,907 - INFO - ✓ medium_08: TTFT=661.99ms, TPOT=28.32ms, Tokens=50
+2026-05-11 18:55:02,775 - INFO - ✓ medium_09: TTFT=844.75ms, TPOT=28.29ms, Tokens=17
+2026-05-11 18:55:04,149 - INFO - ✓ medium_10: TTFT=804.74ms, TPOT=0ms, Tokens=1
+2026-05-11 18:55:09,160 - INFO - ✓ long_context_01: TTFT=4440.5ms, TPOT=0ms, Tokens=1
+2026-05-11 18:55:16,630 - INFO - ✓ long_02: TTFT=6425.06ms, TPOT=33.36ms, Tokens=15
+2026-05-11 18:55:26,419 - INFO - ✓ long_03: TTFT=9218.14ms, TPOT=0ms, Tokens=1
+2026-05-11 18:55:37,894 - INFO - ✓ long_04: TTFT=10903.85ms, TPOT=0ms, Tokens=1
+2026-05-11 18:55:48,700 - INFO - ✓ long_05: TTFT=10233.24ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:00,622 - INFO - ✓ long_06: TTFT=10615.89ms, TPOT=33.33ms, Tokens=23
+2026-05-11 18:56:11,670 - INFO - ✓ long_07: TTFT=10477.91ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:24,494 - INFO - ✓ long_08: TTFT=12253.12ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:36,017 - INFO - ✓ long_09: TTFT=10951.85ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:49,425 - INFO - ✓ long_10: TTFT=12232.06ms, TPOT=33.49ms, Tokens=19
+2026-05-11 18:56:49,732 - INFO - Trial 1 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b/trial_1.json
+2026-05-11 18:56:49,733 - INFO - 
+--- Trial 2/3 ---
+2026-05-11 18:56:50,177 - INFO - ✓ short_baseline_01: TTFT=185.81ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:50,815 - INFO - ✓ short_02: TTFT=63.0ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:51,460 - INFO - ✓ short_03: TTFT=70.17ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:52,104 - INFO - ✓ short_04: TTFT=66.59ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:52,885 - INFO - ✓ short_05: TTFT=204.29ms, TPOT=0ms, Tokens=1
+2026-05-11 18:56:56,338 - INFO - ✓ short_06: TTFT=67.94ms, TPOT=28.36ms, Tokens=100
+2026-05-11 18:56:56,985 - INFO - ✓ short_07: TTFT=69.98ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:00,430 - INFO - ✓ short_08: TTFT=64.29ms, TPOT=28.32ms, Tokens=100
+2026-05-11 18:57:01,216 - INFO - ✓ short_09: TTFT=208.71ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:01,868 - INFO - ✓ short_10: TTFT=74.57ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:05,699 - INFO - ✓ medium_reasoning_01: TTFT=450.94ms, TPOT=28.47ms, Tokens=100
+2026-05-11 18:57:06,334 - INFO - ✓ medium_02: TTFT=76.03ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:07,603 - INFO - ✓ medium_03: TTFT=71.62ms, TPOT=28.54ms, Tokens=23
+2026-05-11 18:57:09,061 - INFO - ✓ medium_04: TTFT=71.41ms, TPOT=28.21ms, Tokens=30
+2026-05-11 18:57:09,691 - INFO - ✓ medium_05: TTFT=69.58ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:12,259 - INFO - ✓ medium_06: TTFT=68.94ms, TPOT=28.45ms, Tokens=69
+2026-05-11 18:57:12,889 - INFO - ✓ medium_07: TTFT=65.91ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:16,348 - INFO - ✓ medium_08: TTFT=66.08ms, TPOT=28.59ms, Tokens=100
+2026-05-11 18:57:18,230 - INFO - ✓ medium_09: TTFT=65.15ms, TPOT=28.37ms, Tokens=45
+2026-05-11 18:57:19,370 - INFO - ✓ medium_10: TTFT=62.94ms, TPOT=28.19ms, Tokens=19
+2026-05-11 18:57:20,002 - INFO - ✓ long_context_01: TTFT=62.6ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:21,488 - INFO - ✓ long_02: TTFT=70.42ms, TPOT=32.58ms, Tokens=27
+2026-05-11 18:57:22,128 - INFO - ✓ long_03: TTFT=71.45ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:24,163 - INFO - ✓ long_04: TTFT=72.09ms, TPOT=36.7ms, Tokens=39
+2026-05-11 18:57:26,226 - INFO - ✓ long_05: TTFT=72.9ms, TPOT=35.72ms, Tokens=41
+2026-05-11 18:57:26,868 - INFO - ✓ long_06: TTFT=70.45ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:30,338 - INFO - ✓ long_07: TTFT=68.94ms, TPOT=36.28ms, Tokens=79
+2026-05-11 18:57:34,497 - INFO - ✓ long_08: TTFT=69.32ms, TPOT=35.53ms, Tokens=100
+2026-05-11 18:57:37,073 - INFO - ✓ long_09: TTFT=61.03ms, TPOT=35.54ms, Tokens=56
+2026-05-11 18:57:37,694 - INFO - ✓ long_10: TTFT=59.68ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:38,003 - INFO - Trial 2 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b/trial_2.json
+2026-05-11 18:57:38,003 - INFO - 
+--- Trial 3/3 ---
+2026-05-11 18:57:38,369 - INFO - ✓ short_baseline_01: TTFT=106.52ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:38,971 - INFO - ✓ short_02: TTFT=43.77ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:39,770 - INFO - ✓ short_03: TTFT=222.49ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:40,697 - INFO - ✓ short_04: TTFT=44.42ms, TPOT=27.87ms, Tokens=12
+2026-05-11 18:57:41,439 - INFO - ✓ short_05: TTFT=183.46ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:42,327 - INFO - ✓ short_06: TTFT=320.72ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:42,938 - INFO - ✓ short_07: TTFT=43.57ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:43,688 - INFO - ✓ short_08: TTFT=182.17ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:44,427 - INFO - ✓ short_09: TTFT=180.94ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:47,853 - INFO - ✓ short_10: TTFT=43.97ms, TPOT=28.35ms, Tokens=100
+2026-05-11 18:57:51,668 - INFO - ✓ medium_reasoning_01: TTFT=422.91ms, TPOT=28.44ms, Tokens=100
+2026-05-11 18:57:52,541 - INFO - ✓ medium_02: TTFT=43.88ms, TPOT=27.96ms, Tokens=10
+2026-05-11 18:57:53,992 - INFO - ✓ medium_03: TTFT=45.06ms, TPOT=28.55ms, Tokens=30
+2026-05-11 18:57:55,600 - INFO - ✓ medium_04: TTFT=43.9ms, TPOT=28.2ms, Tokens=36
+2026-05-11 18:57:56,220 - INFO - ✓ medium_05: TTFT=43.9ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:57,375 - INFO - ✓ medium_06: TTFT=44.44ms, TPOT=28.15ms, Tokens=20
+2026-05-11 18:57:57,994 - INFO - ✓ medium_07: TTFT=44.18ms, TPOT=0ms, Tokens=1
+2026-05-11 18:57:59,216 - INFO - ✓ medium_08: TTFT=661.7ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:00,629 - INFO - ✓ medium_09: TTFT=44.94ms, TPOT=28.24ms, Tokens=29
+2026-05-11 18:58:01,250 - INFO - ✓ medium_10: TTFT=44.17ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:01,877 - INFO - ✓ long_context_01: TTFT=49.64ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:02,508 - INFO - ✓ long_02: TTFT=54.03ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:03,143 - INFO - ✓ long_03: TTFT=59.19ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:03,777 - INFO - ✓ long_04: TTFT=57.52ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:05,327 - INFO - ✓ long_05: TTFT=60.26ms, TPOT=35.64ms, Tokens=27
+2026-05-11 18:58:05,948 - INFO - ✓ long_06: TTFT=58.72ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:06,572 - INFO - ✓ long_07: TTFT=61.38ms, TPOT=0ms, Tokens=1
+2026-05-11 18:58:07,617 - INFO - ✓ long_08: TTFT=60.4ms, TPOT=35.42ms, Tokens=13
+2026-05-11 18:58:09,333 - INFO - ✓ long_09: TTFT=63.74ms, TPOT=38.99ms, Tokens=29
+2026-05-11 18:58:10,790 - INFO - ✓ long_10: TTFT=59.54ms, TPOT=36.04ms, Tokens=24
+2026-05-11 18:58:11,097 - INFO - Trial 3 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b/trial_3.json
+2026-05-11 18:58:11,691 - INFO - Statistics saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b/statistics.json and /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b/statistics.csv
+2026-05-11 18:58:11,692 - INFO - 
+✓ Benchmark complete. Results in: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tinyllama-1.1b

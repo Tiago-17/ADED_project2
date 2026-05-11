@@ -10,7 +10,7 @@
     "temperature": 0.7,
     "top_p": 0.9,
     "top_k": 40,
-    "max_tokens": 512,
+    "max_tokens": 100,
     "repeat_penalty": 1.1,
     "repeat_last_n": 64,
     "seed": 42

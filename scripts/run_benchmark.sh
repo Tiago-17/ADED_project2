@@ -1,101 +1,166 @@
 #!/bin/bash
-#SBATCH --job-name=llm_benchmark
+#SBATCH --job-name=llm_master_bench
 #SBATCH --partition=normal-arm
+#SBATCH --account=f202500010hpcvlabuminhoa
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
-#SBATCH --cpus-per-task=32
-#SBATCH --time=02:00:00
-#SBATCH --output=logs/benchmark_%j.out
-#SBATCH --error=logs/benchmark_%j.err
-
-# ============================================
-# LLM Inference Benchmark - Track A1
-# ============================================
+#SBATCH --cpus-per-task=48
+#SBATCH --time=12:00:00
+#SBATCH --output=logs/master_bench_%j.out
+#SBATCH --error=logs/master_bench_%j.err
 
 set -euo pipefail
 
-SCRIPT_DIR="${SLURM_SUBMIT_DIR:-$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)}"
-PROJECT_ROOT="$(cd -- "$SCRIPT_DIR/.." && pwd)"
+# =========================================================
+# 1. Bulletproof Path Resolution
+# =========================================================
+if [ -d "$SLURM_SUBMIT_DIR/llama.cpp" ]; then
+    PROJECT_ROOT="$SLURM_SUBMIT_DIR"
+else
+    PROJECT_ROOT="$(cd "$SLURM_SUBMIT_DIR/.." && pwd)"
+fi
+SCRIPT_DIR="$PROJECT_ROOT/scripts"
+mkdir -p "$PROJECT_ROOT/results" "$PROJECT_ROOT/logs"
 
-# Load required modules
-module load GCC
-module load CMake
+echo "================================================="
+echo "Starting Master Benchmark Pipeline"
+echo "Project Root: $PROJECT_ROOT"
+echo "================================================="
 
-# Project directories
-MODELS_DIR="$PROJECT_ROOT/models"
-SCRIPTS_DIR="$PROJECT_ROOT/scripts"
-RESULTS_DIR="$PROJECT_ROOT/results"
+# =========================================================
+# 2. Load Modules & OpenSSL
+# =========================================================
+echo "Loading modules..."
+if command -v module >/dev/null 2>&1; then
+    module purge
+    module load GCCcore/13.2.0 || module load GCC || true
+    module load CMake || true
+    module load OpenSSL/3 || module load OpenSSL || true
+    module load Python/3.11.5-GCCcore-13.2.0
+fi
+
+OPENSSL_FALLBACK_DIR="/eb/aarch64/software/OpenSSL/3/lib"
+if [[ -d "$OPENSSL_FALLBACK_DIR" ]]; then
+    export LD_LIBRARY_PATH="$OPENSSL_FALLBACK_DIR:${LD_LIBRARY_PATH:-}"
+fi
+
+# =========================================================
+# 3. Activate Python Environment & Check Binaries
+# =========================================================
+if [ ! -f "$PROJECT_ROOT/env-spark/bin/activate" ]; then
+    echo "ERROR: Virtual environment not found. Did you run setup_project.sh?"
+    exit 1
+fi
+source "$PROJECT_ROOT/env-spark/bin/activate"
+
 SERVER_BIN="$PROJECT_ROOT/llama.cpp/build/bin/llama-server"
-PYTHON_BIN="$PROJECT_ROOT/env-spark/bin/python"
-
-# Create directories
-mkdir -p "$RESULTS_DIR" "$PROJECT_ROOT/logs"
-
 if [[ ! -x "$SERVER_BIN" ]]; then
-    if command -v llama-server >/dev/null 2>&1; then
-        SERVER_BIN="$(command -v llama-server)"
-    else
-        echo "ERROR: llama-server nao encontrado. Execute scripts/run_llama.sh primeiro ou garanta que o binario esta no PATH."
-        exit 1
-    fi
+    echo "ERROR: $SERVER_BIN not found or not executable. Compile llama.cpp first!"
+    exit 1
 fi
 
-if [[ ! -x "$PYTHON_BIN" ]]; then
-    PYTHON_BIN="python3"
-fi
-
-# Model and configuration
-MODEL_FILE="meta-llama-3.1-8b-instruct-q4_k_m.gguf"
-MODEL_NAME="llama-3.1-8b"
-NUM_THREADS=16
 SERVER_PORT=8080
 
-echo "============================================"
-echo "Starting benchmark for: $MODEL_NAME"
-echo "Threads: $NUM_THREADS"
-echo "============================================"
+# =========================================================
+# EXPERIMENT HELPER FUNCTION
+# =========================================================
+run_experiment() {
+    local model_file=$1
+    local run_name=$2
+    local threads=$3
 
-# Step 1: Start llama.cpp server in background
-echo "[1/3] Starting llama.cpp server..."
-"$SERVER_BIN" \
-    -m "$MODELS_DIR/$MODEL_FILE" \
-    -c 4096 \
-    -t $NUM_THREADS \
-    --port $SERVER_PORT \
-    --host 0.0.0.0 \
-    > "$PROJECT_ROOT/logs/server_${SLURM_JOB_ID}.log" 2>&1 &
+    local model_path="$PROJECT_ROOT/models/$model_file"
 
-SERVER_PID=$!
-echo "Server PID: $SERVER_PID"
+    echo ""
+    echo "-------------------------------------------------"
+    echo "🚀 RUNNING EXPERIMENT: $run_name (Threads: $threads)"
+    echo "-------------------------------------------------"
 
-# Give server time to load the model
-sleep 10
+    if [[ ! -f "$model_path" ]]; then
+        echo "⚠️  WARNING: Model $model_file not found. Skipping $run_name..."
+        return 0
+    fi
 
-# Step 2: Run benchmark
-echo "[2/3] Running benchmark..."
-cd "$PROJECT_ROOT"
+    mkdir -p "$PROJECT_ROOT/results/$run_name"
 
-"$PYTHON_BIN" "$SCRIPTS_DIR/benchmark_llm.py" \
-    --model "$MODEL_NAME" \
-    --project-root "$PROJECT_ROOT" \
-    --threads $NUM_THREADS \
-    --port $SERVER_PORT \
-    --trials 3
+    # 1. Start Resource Monitor
+    python "$SCRIPT_DIR/monitor_resources.py" \
+        --output-dir "$PROJECT_ROOT/results/$run_name" \
+        --prefix "$run_name" &
+    local monitor_pid=$!
 
-BENCHMARK_EXIT_CODE=$?
+    # 2. Start llama-server
+    echo "Starting server on port $SERVER_PORT..."
+    "$SERVER_BIN" -m "$model_path" -c 4096 -t $threads --port $SERVER_PORT --host 0.0.0.0 \
+        > "$PROJECT_ROOT/logs/server_${run_name}.log" 2>&1 &
+    local server_pid=$!
 
-# Step 3: Cleanup
-echo "[3/3] Stopping server..."
-kill $SERVER_PID 2>/dev/null
-wait $SERVER_PID 2>/dev/null
+    echo "Waiting 20 seconds for server to load the model into memory..."
+    sleep 20
 
-echo "============================================"
-if [ $BENCHMARK_EXIT_CODE -eq 0 ]; then
-    echo "✓ Benchmark completed successfully!"
-    echo "Results: $RESULTS_DIR/$MODEL_NAME/"
-else
-    echo "✗ Benchmark failed with exit code: $BENCHMARK_EXIT_CODE"
-fi
-echo "============================================"
+    # 3. Verify server didn't crash
+    if ! kill -0 $server_pid 2>/dev/null; then
+        echo "❌ ERROR: llama-server crashed! Check logs/server_${run_name}.log"
+        kill $monitor_pid 2>/dev/null || true
+        return 1
+    fi
 
-exit $BENCHMARK_EXIT_CODE
+    # 4. Run Python Benchmark Client
+    echo "Server is healthy. Starting benchmark client..."
+    cd "$PROJECT_ROOT"
+    python "$SCRIPT_DIR/benchmark_llm.py" \
+        --model "$run_name" \
+        --project-root "$PROJECT_ROOT" \
+        --threads $threads \
+        --port $SERVER_PORT \
+        --trials 3 || echo "⚠️  Benchmark script encountered a non-fatal error."
+
+    # 5. Cleanup
+    echo "Cleaning up processes for $run_name..."
+    kill $server_pid 2>/dev/null || true
+    kill $monitor_pid 2>/dev/null || true
+    wait $server_pid 2>/dev/null || true
+    wait $monitor_pid 2>/dev/null || true
+    
+    # Wait to ensure the port is completely freed before the next loop
+    sleep 5 
+    echo "✅ Finished $run_name"
+}
+
+# =========================================================
+# PHASE 1: Threading Dimension (Llama 3.1 8B Q4)
+# =========================================================
+THREADS_TO_TEST=(4 8 16 32 48)
+for t in "${THREADS_TO_TEST[@]}"; do
+    run_experiment "meta-llama-3.1-8b-instruct-q4_k_m.gguf" "llama-3.1-8b-threads-$t" $t
+done
+
+# =========================================================
+# PHASE 2: Other Required Models (Qwen & TinyLlama)
+# =========================================================
+run_experiment "qwen2.5-0.5b-instruct-q4_k_m.gguf" "qwen2.5-0.5b" 16
+run_experiment "tinyllama-1.1b-chat-v1.0-q4_k_m.gguf" "tinyllama-1.1b" 16
+
+# =========================================================
+# PHASE 3: Quantization Dimension (Llama 3.1 8B Q8)
+# =========================================================
+run_experiment "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "llama-3.1-8b-Q8" 16
+
+# =========================================================
+# PHASE 4: Analysis & Graph Generation
+# =========================================================
+echo ""
+echo "================================================="
+echo "📊 GENERATING PLOTS AND PERFORMANCE MODEL"
+echo "================================================="
+# Assuming ~4.6GB for the baseline Q4_K_M model and ~120GB/s bandwidth for Deucalion ARM
+python "$SCRIPT_DIR/analyze_results.py" \
+    --results-dir "$PROJECT_ROOT/results" \
+    --all \
+    --model-size-gb 4.6 \
+    --memory-bw-gbs 120.0
+
+echo "================================================="
+echo "🎉 ALL BENCHMARKS AND PLOTS COMPLETE! 🎉"
+echo "Check the results/plots/ directory for your graphs."
+echo "================================================="
