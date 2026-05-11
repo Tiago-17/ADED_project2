@@ -22,6 +22,9 @@ fi
 SCRIPT_DIR="$PROJECT_ROOT/scripts"
 mkdir -p "$PROJECT_ROOT/results" "$PROJECT_ROOT/logs"
 
+ENV_NAME="env-spark"
+ENV_DIR="$PROJECT_ROOT/$ENV_NAME"
+
 echo "================================================="
 echo "Starting Master Benchmark Pipeline"
 echo "Project Root: $PROJECT_ROOT"
@@ -152,7 +155,10 @@ run_experiment "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "llama-3.1-8b-Q8" 16
 echo ""
 echo "================================================="
 echo "📊 GENERATING PLOTS AND PERFORMANCE MODEL"
-echo "================================================="
+echo "================================================="]
+
+source "$ENV_DIR/bin/activate"
+
 # Assuming ~4.6GB for the baseline Q4_K_M model and ~120GB/s bandwidth for Deucalion ARM
 python "$SCRIPT_DIR/analyze_results.py" \
     --results-dir "$PROJECT_ROOT/results" \

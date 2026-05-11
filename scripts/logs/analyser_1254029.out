@@ -1,0 +1,120 @@
+Loading modules...
+Results directory: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results
+Plots directory: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots
+
+============================================================
+GENERATING ALL PLOTS
+============================================================
+
+Loaded llama-3.1-8b-threads-32: 30 prompts
+Loaded llama-3.1-8b-threads-4: 30 prompts
+Loaded llama-3.1-8b-threads-16: 30 prompts
+Loaded tinyllama-1.1b: 30 prompts
+Loaded qwen2.5-0.5b: 30 prompts
+Loaded llama-3.1-8b-Q8: 30 prompts
+Loaded llama-3.1-8b-threads-8: 30 prompts
+Loaded llama-3.1-8b-threads-48: 30 prompts
+
+--- llama-3.1-8b-threads-32 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-threads-32.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-threads-32.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-threads-32.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-threads-32.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-threads-32.png
+
+--- llama-3.1-8b-threads-4 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-threads-4.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-threads-4.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-threads-4.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-threads-4.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-threads-4.png
+
+--- llama-3.1-8b-threads-16 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-threads-16.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-threads-16.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-threads-16.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-threads-16.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-threads-16.png
+
+--- tinyllama-1.1b ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_tinyllama-1.1b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_tinyllama-1.1b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_tinyllama-1.1b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_tinyllama-1.1b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_tinyllama-1.1b.png
+
+--- qwen2.5-0.5b ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_qwen2.5-0.5b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_qwen2.5-0.5b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_qwen2.5-0.5b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_qwen2.5-0.5b.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_qwen2.5-0.5b.png
+
+--- llama-3.1-8b-Q8 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-Q8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-Q8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-Q8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-Q8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-Q8.png
+
+--- llama-3.1-8b-threads-8 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-threads-8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-threads-8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-threads-8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-threads-8.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-threads-8.png
+
+--- llama-3.1-8b-threads-48 ---
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/ttft_analysis_llama-3.1-8b-threads-48.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/throughput_analysis_llama-3.1-8b-threads-48.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/tpot_analysis_llama-3.1-8b-threads-48.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/performance_model_llama-3.1-8b-threads-48.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/resource_dashboard_llama-3.1-8b-threads-48.png
+✓ Saved: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots/memory_analysis.png
+
+============================================================
+All plots saved to: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/plots
+============================================================
+
+Generated files:
+  • memory_analysis.png (118.8 KB)
+  • performance_model_llama-3.1-8b-Q8.png (82.7 KB)
+  • performance_model_llama-3.1-8b-threads-16.png (85.9 KB)
+  • performance_model_llama-3.1-8b-threads-32.png (83.5 KB)
+  • performance_model_llama-3.1-8b-threads-4.png (84.5 KB)
+  • performance_model_llama-3.1-8b-threads-48.png (87.3 KB)
+  • performance_model_llama-3.1-8b-threads-8.png (84.4 KB)
+  • performance_model_qwen2.5-0.5b.png (84.6 KB)
+  • performance_model_tinyllama-1.1b.png (71.8 KB)
+  • resource_dashboard_llama-3.1-8b-Q8.png (341.3 KB)
+  • resource_dashboard_llama-3.1-8b-threads-16.png (341.8 KB)
+  • resource_dashboard_llama-3.1-8b-threads-32.png (354.1 KB)
+  • resource_dashboard_llama-3.1-8b-threads-4.png (393.4 KB)
+  • resource_dashboard_llama-3.1-8b-threads-48.png (500.2 KB)
+  • resource_dashboard_llama-3.1-8b-threads-8.png (356.4 KB)
+  • resource_dashboard_qwen2.5-0.5b.png (318.5 KB)
+  • resource_dashboard_tinyllama-1.1b.png (285.3 KB)
+  • throughput_analysis_llama-3.1-8b-Q8.png (117.0 KB)
+  • throughput_analysis_llama-3.1-8b-threads-16.png (117.6 KB)
+  • throughput_analysis_llama-3.1-8b-threads-32.png (122.8 KB)
+  • throughput_analysis_llama-3.1-8b-threads-4.png (112.9 KB)
+  • throughput_analysis_llama-3.1-8b-threads-48.png (114.3 KB)
+  • throughput_analysis_llama-3.1-8b-threads-8.png (120.8 KB)
+  • throughput_analysis_qwen2.5-0.5b.png (119.1 KB)
+  • throughput_analysis_tinyllama-1.1b.png (111.5 KB)
+  • tpot_analysis_llama-3.1-8b-Q8.png (66.8 KB)
+  • tpot_analysis_llama-3.1-8b-threads-16.png (68.7 KB)
+  • tpot_analysis_llama-3.1-8b-threads-32.png (65.3 KB)
+  • tpot_analysis_llama-3.1-8b-threads-4.png (75.2 KB)
+  • tpot_analysis_llama-3.1-8b-threads-48.png (68.4 KB)
+  • tpot_analysis_llama-3.1-8b-threads-8.png (72.1 KB)
+  • tpot_analysis_qwen2.5-0.5b.png (66.2 KB)
+  • tpot_analysis_tinyllama-1.1b.png (66.2 KB)
+  • ttft_analysis_llama-3.1-8b-Q8.png (86.8 KB)
+  • ttft_analysis_llama-3.1-8b-threads-16.png (99.9 KB)
+  • ttft_analysis_llama-3.1-8b-threads-32.png (95.6 KB)
+  • ttft_analysis_llama-3.1-8b-threads-4.png (94.1 KB)
+  • ttft_analysis_llama-3.1-8b-threads-48.png (98.8 KB)
+  • ttft_analysis_llama-3.1-8b-threads-8.png (98.5 KB)
+  • ttft_analysis_qwen2.5-0.5b.png (90.8 KB)
+  • ttft_analysis_tinyllama-1.1b.png (92.5 KB)

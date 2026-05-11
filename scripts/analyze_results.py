@@ -808,3 +808,34 @@ Examples:
     
     # Create analyzer
     analyzer = ResultsAnalyzer(args.results_dir)
+    
+    # 1. Package the performance parameters if provided
+    model_params = None
+    if args.model_size_gb and args.memory_bw_gbs:
+        # Create a dictionary that applies these params to any model analyzed
+        model_params = {
+            args.model: {
+                'model_size_gb': args.model_size_gb, 
+                'memory_bandwidth_gbs': args.memory_bw_gbs
+            }
+        } if args.model else defaultdict(lambda: {
+            'model_size_gb': args.model_size_gb, 
+            'memory_bandwidth_gbs': args.memory_bw_gbs
+        })
+
+    # 2. Trigger the appropriate plotting functions based on arguments
+    if args.all:
+        analyzer.generate_all_plots(model_name=args.model, model_params=model_params)
+    elif args.compare_models:
+        analyzer.plot_memory_analysis()
+        analyzer.plot_throughput_vs_threads()
+        print(f"Comparison plots saved to: {analyzer.plots_dir}")
+    elif args.model:
+        analyzer.generate_all_plots(model_name=args.model, model_params=model_params)
+    else:
+        parser.print_help()
+        print("\nERROR: Please specify an action like --all, --compare-models, or --model <name>")
+
+# 3. Actually execute the main function
+if __name__ == "__main__":
+    main()
