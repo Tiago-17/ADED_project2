@@ -1,0 +1,123 @@
+2026-05-13 01:59:43,155 - INFO - Logging to: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/logs/benchmark_qwen2.5-0.5b_20260513_015943.log
+2026-05-13 01:59:43,158 - INFO - Project root: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2
+2026-05-13 01:59:43,158 - INFO - Model: qwen2.5-0.5b
+2026-05-13 01:59:43,158 - INFO - Threads: 32
+2026-05-13 01:59:43,159 - INFO - Loaded 30 prompts
+2026-05-13 01:59:46,514 - INFO - Checking server health at http://localhost:8080/health...
+2026-05-13 01:59:46,528 - INFO - ✓ Server is healthy and ready
+2026-05-13 01:59:46,529 - INFO - Running warmup...
+2026-05-13 01:59:46,529 - INFO - Warmup 1/3
+2026-05-13 01:59:48,631 - INFO - ✓ warmup_0: TTFT=77.99ms, TPOT=16.75ms, Tokens=100
+2026-05-13 01:59:48,932 - INFO - Warmup 2/3
+2026-05-13 01:59:50,971 - INFO - ✓ warmup_1: TTFT=87.0ms, TPOT=16.92ms, Tokens=100
+2026-05-13 01:59:51,272 - INFO - Warmup 3/3
+2026-05-13 01:59:53,310 - INFO - ✓ warmup_2: TTFT=78.41ms, TPOT=18.08ms, Tokens=94
+2026-05-13 01:59:53,611 - INFO - Warmup complete
+
+2026-05-13 01:59:53,611 - INFO - ============================================================
+2026-05-13 01:59:53,612 - INFO - BENCHMARK: qwen2.5-0.5b (3 trials)
+2026-05-13 01:59:53,612 - INFO - ============================================================
+
+2026-05-13 01:59:53,886 - INFO - Memory before benchmark: 585.8 MB RSS
+2026-05-13 01:59:53,887 - INFO - 
+--- Trial 1/3 ---
+2026-05-13 01:59:54,369 - INFO - ✓ short_baseline_01: TTFT=87.24ms, TPOT=16.89ms, Tokens=8
+2026-05-13 01:59:56,751 - INFO - ✓ short_02: TTFT=69.0ms, TPOT=17.01ms, Tokens=100
+2026-05-13 01:59:59,128 - INFO - ✓ short_03: TTFT=113.99ms, TPOT=17.01ms, Tokens=100
+2026-05-13 02:00:01,561 - INFO - ✓ short_04: TTFT=164.88ms, TPOT=17.07ms, Tokens=100
+2026-05-13 02:00:03,950 - INFO - ✓ short_05: TTFT=121.28ms, TPOT=17.05ms, Tokens=100
+2026-05-13 02:00:06,358 - INFO - ✓ short_06: TTFT=139.01ms, TPOT=17.07ms, Tokens=100
+2026-05-13 02:00:08,717 - INFO - ✓ short_07: TTFT=95.31ms, TPOT=17.04ms, Tokens=100
+2026-05-13 02:00:11,077 - INFO - ✓ short_08: TTFT=95.85ms, TPOT=17.04ms, Tokens=100
+2026-05-13 02:00:13,435 - INFO - ✓ short_09: TTFT=94.75ms, TPOT=17.03ms, Tokens=100
+2026-05-13 02:00:15,823 - INFO - ✓ short_10: TTFT=121.4ms, TPOT=17.05ms, Tokens=100
+2026-05-13 02:00:18,278 - INFO - ✓ medium_reasoning_01: TTFT=185.64ms, TPOT=17.06ms, Tokens=100
+2026-05-13 02:00:20,763 - INFO - ✓ medium_02: TTFT=218.36ms, TPOT=17.03ms, Tokens=100
+2026-05-13 02:00:24,001 - INFO - ✓ medium_03: TTFT=945.36ms, TPOT=17.31ms, Tokens=100
+2026-05-13 02:00:26,561 - INFO - ✓ medium_04: TTFT=285.69ms, TPOT=17.12ms, Tokens=100
+2026-05-13 02:00:29,172 - INFO - ✓ medium_05: TTFT=333.8ms, TPOT=17.15ms, Tokens=100
+2026-05-13 02:00:31,741 - INFO - ✓ medium_06: TTFT=294.49ms, TPOT=17.13ms, Tokens=100
+2026-05-13 02:00:34,453 - INFO - ✓ medium_07: TTFT=429.31ms, TPOT=17.2ms, Tokens=100
+2026-05-13 02:00:37,030 - INFO - ✓ medium_08: TTFT=276.69ms, TPOT=17.13ms, Tokens=100
+2026-05-13 02:00:39,639 - INFO - ✓ medium_09: TTFT=342.73ms, TPOT=17.17ms, Tokens=100
+2026-05-13 02:00:42,247 - INFO - ✓ medium_10: TTFT=342.53ms, TPOT=17.16ms, Tokens=100
+2026-05-13 02:00:46,416 - INFO - ✓ long_context_01: TTFT=1841.48ms, TPOT=17.79ms, Tokens=100
+2026-05-13 02:00:51,423 - INFO - ✓ long_02: TTFT=2658.01ms, TPOT=18.01ms, Tokens=100
+2026-05-13 02:00:57,016 - INFO - ✓ long_03: TTFT=3211.85ms, TPOT=17.98ms, Tokens=100
+2026-05-13 02:01:03,290 - INFO - ✓ long_04: TTFT=3927.23ms, TPOT=17.98ms, Tokens=100
+2026-05-13 02:01:09,317 - INFO - ✓ long_05: TTFT=3679.35ms, TPOT=17.98ms, Tokens=100
+2026-05-13 02:01:15,377 - INFO - ✓ long_06: TTFT=3711.36ms, TPOT=17.98ms, Tokens=100
+2026-05-13 02:01:21,465 - INFO - ✓ long_07: TTFT=3740.45ms, TPOT=17.97ms, Tokens=100
+2026-05-13 02:01:27,567 - INFO - ✓ long_08: TTFT=3750.73ms, TPOT=18.02ms, Tokens=100
+2026-05-13 02:01:33,844 - INFO - ✓ long_09: TTFT=3930.6ms, TPOT=17.95ms, Tokens=100
+2026-05-13 02:01:40,119 - INFO - ✓ long_10: TTFT=3930.71ms, TPOT=17.94ms, Tokens=100
+2026-05-13 02:01:40,436 - INFO - Trial 1 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b/trial_1.json
+2026-05-13 02:01:40,437 - INFO - 
+--- Trial 2/3 ---
+2026-05-13 02:01:42,506 - INFO - ✓ short_baseline_01: TTFT=125.55ms, TPOT=16.94ms, Tokens=100
+2026-05-13 02:01:44,859 - INFO - ✓ short_02: TTFT=109.11ms, TPOT=16.94ms, Tokens=100
+2026-05-13 02:01:47,245 - INFO - ✓ short_03: TTFT=138.43ms, TPOT=16.97ms, Tokens=100
+2026-05-13 02:01:49,694 - INFO - ✓ short_04: TTFT=200.64ms, TPOT=16.99ms, Tokens=100
+2026-05-13 02:01:51,855 - INFO - ✓ short_05: TTFT=155.0ms, TPOT=16.93ms, Tokens=86
+2026-05-13 02:01:54,276 - INFO - ✓ short_06: TTFT=172.44ms, TPOT=16.98ms, Tokens=100
+2026-05-13 02:01:56,651 - INFO - ✓ short_07: TTFT=130.07ms, TPOT=16.96ms, Tokens=100
+2026-05-13 02:01:59,027 - INFO - ✓ short_08: TTFT=128.47ms, TPOT=16.97ms, Tokens=100
+2026-05-13 02:02:01,403 - INFO - ✓ short_09: TTFT=133.78ms, TPOT=16.95ms, Tokens=100
+2026-05-13 02:02:03,814 - INFO - ✓ short_10: TTFT=157.1ms, TPOT=16.96ms, Tokens=100
+2026-05-13 02:02:06,288 - INFO - ✓ medium_reasoning_01: TTFT=217.93ms, TPOT=17.0ms, Tokens=100
+2026-05-13 02:02:08,791 - INFO - ✓ medium_02: TTFT=251.11ms, TPOT=17.04ms, Tokens=100
+2026-05-13 02:02:12,045 - INFO - ✓ medium_03: TTFT=978.51ms, TPOT=17.26ms, Tokens=100
+2026-05-13 02:02:14,647 - INFO - ✓ medium_04: TTFT=344.64ms, TPOT=17.06ms, Tokens=100
+2026-05-13 02:02:17,266 - INFO - ✓ medium_05: TTFT=360.15ms, TPOT=17.1ms, Tokens=100
+2026-05-13 02:02:19,845 - INFO - ✓ medium_06: TTFT=322.6ms, TPOT=17.08ms, Tokens=100
+2026-05-13 02:02:22,556 - INFO - ✓ medium_07: TTFT=448.94ms, TPOT=17.14ms, Tokens=100
+2026-05-13 02:02:25,107 - INFO - ✓ medium_08: TTFT=297.29ms, TPOT=17.05ms, Tokens=100
+2026-05-13 02:02:27,765 - INFO - ✓ medium_09: TTFT=365.48ms, TPOT=17.1ms, Tokens=100
+2026-05-13 02:02:30,381 - INFO - ✓ medium_10: TTFT=350.98ms, TPOT=17.09ms, Tokens=100
+2026-05-13 02:02:34,565 - INFO - ✓ long_context_01: TTFT=1858.3ms, TPOT=17.71ms, Tokens=100
+2026-05-13 02:02:39,600 - INFO - ✓ long_02: TTFT=2676.12ms, TPOT=17.97ms, Tokens=100
+2026-05-13 02:02:45,151 - INFO - ✓ long_03: TTFT=3201.62ms, TPOT=17.94ms, Tokens=100
+2026-05-13 02:02:51,420 - INFO - ✓ long_04: TTFT=3921.11ms, TPOT=18.0ms, Tokens=100
+2026-05-13 02:02:57,423 - INFO - ✓ long_05: TTFT=3651.07ms, TPOT=18.03ms, Tokens=100
+2026-05-13 02:03:03,445 - INFO - ✓ long_06: TTFT=3676.07ms, TPOT=18.0ms, Tokens=100
+2026-05-13 02:03:09,501 - INFO - ✓ long_07: TTFT=3717.76ms, TPOT=17.88ms, Tokens=100
+2026-05-13 02:03:15,558 - INFO - ✓ long_08: TTFT=3711.35ms, TPOT=17.97ms, Tokens=100
+2026-05-13 02:03:21,813 - INFO - ✓ long_09: TTFT=3897.19ms, TPOT=18.07ms, Tokens=100
+2026-05-13 02:03:28,055 - INFO - ✓ long_10: TTFT=3896.62ms, TPOT=17.96ms, Tokens=100
+2026-05-13 02:03:28,373 - INFO - Trial 2 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b/trial_2.json
+2026-05-13 02:03:28,373 - INFO - 
+--- Trial 3/3 ---
+2026-05-13 02:03:29,317 - INFO - ✓ short_baseline_01: TTFT=87.55ms, TPOT=16.85ms, Tokens=36
+2026-05-13 02:03:31,637 - INFO - ✓ short_02: TTFT=69.11ms, TPOT=17.0ms, Tokens=100
+2026-05-13 02:03:34,001 - INFO - ✓ short_03: TTFT=112.13ms, TPOT=17.01ms, Tokens=100
+2026-05-13 02:03:34,900 - INFO - ✓ short_04: TTFT=164.16ms, TPOT=16.88ms, Tokens=11
+2026-05-13 02:03:37,273 - INFO - ✓ short_05: TTFT=120.47ms, TPOT=17.01ms, Tokens=100
+2026-05-13 02:03:39,001 - INFO - ✓ short_06: TTFT=138.42ms, TPOT=16.91ms, Tokens=61
+2026-05-13 02:03:41,353 - INFO - ✓ short_07: TTFT=95.38ms, TPOT=16.97ms, Tokens=100
+2026-05-13 02:03:43,704 - INFO - ✓ short_08: TTFT=95.53ms, TPOT=16.97ms, Tokens=100
+2026-05-13 02:03:46,056 - INFO - ✓ short_09: TTFT=95.74ms, TPOT=17.87ms, Tokens=95
+2026-05-13 02:03:47,156 - INFO - ✓ short_10: TTFT=121.23ms, TPOT=16.81ms, Tokens=25
+2026-05-13 02:03:49,603 - INFO - ✓ medium_reasoning_01: TTFT=185.56ms, TPOT=17.03ms, Tokens=100
+2026-05-13 02:03:52,086 - INFO - ✓ medium_02: TTFT=219.05ms, TPOT=17.06ms, Tokens=100
+2026-05-13 02:03:55,315 - INFO - ✓ medium_03: TTFT=944.98ms, TPOT=17.24ms, Tokens=100
+2026-05-13 02:03:57,865 - INFO - ✓ medium_04: TTFT=285.28ms, TPOT=17.06ms, Tokens=100
+2026-05-13 02:04:00,465 - INFO - ✓ medium_05: TTFT=333.03ms, TPOT=17.1ms, Tokens=100
+2026-05-13 02:04:03,028 - INFO - ✓ medium_06: TTFT=294.64ms, TPOT=17.1ms, Tokens=100
+2026-05-13 02:04:05,734 - INFO - ✓ medium_07: TTFT=429.34ms, TPOT=17.19ms, Tokens=100
+2026-05-13 02:04:08,281 - INFO - ✓ medium_08: TTFT=278.06ms, TPOT=17.1ms, Tokens=100
+2026-05-13 02:04:10,896 - INFO - ✓ medium_09: TTFT=343.17ms, TPOT=17.14ms, Tokens=100
+2026-05-13 02:04:13,499 - INFO - ✓ medium_10: TTFT=343.43ms, TPOT=17.12ms, Tokens=100
+2026-05-13 02:04:17,663 - INFO - ✓ long_context_01: TTFT=1841.56ms, TPOT=17.76ms, Tokens=100
+2026-05-13 02:04:22,680 - INFO - ✓ long_02: TTFT=2658.0ms, TPOT=18.13ms, Tokens=100
+2026-05-13 02:04:28,219 - INFO - ✓ long_03: TTFT=3202.52ms, TPOT=17.89ms, Tokens=100
+2026-05-13 02:04:34,457 - INFO - ✓ long_04: TTFT=3900.21ms, TPOT=17.92ms, Tokens=100
+2026-05-13 02:04:40,443 - INFO - ✓ long_05: TTFT=3645.11ms, TPOT=17.94ms, Tokens=100
+2026-05-13 02:04:46,455 - INFO - ✓ long_06: TTFT=3674.0ms, TPOT=17.9ms, Tokens=100
+2026-05-13 02:04:52,530 - INFO - ✓ long_07: TTFT=3719.59ms, TPOT=17.98ms, Tokens=100
+2026-05-13 02:04:58,585 - INFO - ✓ long_08: TTFT=3710.83ms, TPOT=17.96ms, Tokens=100
+2026-05-13 02:05:04,823 - INFO - ✓ long_09: TTFT=3896.57ms, TPOT=17.92ms, Tokens=100
+2026-05-13 02:05:11,064 - INFO - ✓ long_10: TTFT=3896.78ms, TPOT=17.95ms, Tokens=100
+2026-05-13 02:05:11,381 - INFO - Trial 3 saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b/trial_3.json
+2026-05-13 02:05:12,153 - INFO - Statistics saved to /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b/statistics.json and /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b/statistics.csv
+2026-05-13 02:05:12,155 - INFO - 
+✓ Benchmark complete. Results in: /projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/qwen2.5-0.5b

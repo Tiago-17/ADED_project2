@@ -141,13 +141,13 @@ done
 # =========================================================
 # PHASE 2: Other Required Models (Qwen & TinyLlama)
 # =========================================================
-run_experiment "qwen2.5-0.5b-instruct-q4_k_m.gguf" "qwen2.5-0.5b" 16
-run_experiment "tinyllama-1.1b-chat-v1.0-q4_k_m.gguf" "tinyllama-1.1b" 16
+run_experiment "qwen2.5-0.5b-instruct-q4_k_m.gguf" "qwen2.5-0.5b" 32
+run_experiment "tinyllama-1.1b-chat-v1.0-q4_k_m.gguf" "tinyllama-1.1b" 32
 
 # =========================================================
 # PHASE 3: Quantization Dimension (Llama 3.1 8B Q8)
 # =========================================================
-run_experiment "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "llama-3.1-8b-Q8" 16
+run_experiment "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "llama-3.1-8b-Q8" 32
 
 # =========================================================
 # PHASE 4: Analysis & Graph Generation
@@ -164,7 +164,7 @@ python "$SCRIPT_DIR/analyze_results.py" \
     --results-dir "$PROJECT_ROOT/results" \
     --all \
     --model-size-gb 4.6 \
-    --memory-bw-gbs 120.0
+    --memory-bw-gbs 1024.0
 
 echo "================================================="
 echo "🎉 ALL BENCHMARKS AND PLOTS COMPLETE! 🎉"

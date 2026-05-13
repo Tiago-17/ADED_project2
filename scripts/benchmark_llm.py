@@ -23,7 +23,6 @@ from pathlib import Path
 from typing import Dict, List, Optional
 import logging
 
-
 class LLMBenchmark:
     """Main benchmark class for LLM inference performance measurement."""
     
@@ -34,9 +33,7 @@ class LLMBenchmark:
                  num_threads: int = 16,
                  max_tokens: int = 512,
                  temperature: float = 0.7):
-        """
-        Initialize benchmark configuration.
-        """
+        """Initialize benchmark configuration."""
         self.model_name = model_name
         self.project_root = Path(project_root).resolve()
         self.server_url = server_url
@@ -71,18 +68,15 @@ class LLMBenchmark:
         """Configure logging to file and console."""
         log_file = self.logs_dir / f"benchmark_{self.model_name}_{datetime.now().strftime('%Y%m%d_%H%M%S')}.log"
         
-        # Create logger
         self.logger = logging.getLogger(f"benchmark_{self.model_name}")
         self.logger.setLevel(logging.INFO)
         self.logger.handlers.clear()
         
-        # File handler
         file_handler = logging.FileHandler(log_file)
         file_handler.setLevel(logging.DEBUG)
         file_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
         file_handler.setFormatter(file_formatter)
         
-        # Console handler
         console_handler = logging.StreamHandler()
         console_handler.setLevel(logging.INFO)
         console_formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
@@ -90,7 +84,6 @@ class LLMBenchmark:
         
         self.logger.addHandler(file_handler)
         self.logger.addHandler(console_handler)
-        
         self.logger.info(f"Logging to: {log_file}")
     
     def _load_prompts(self) -> List[Dict]:
@@ -112,7 +105,6 @@ class LLMBenchmark:
             
             prompts = data.get('prompts', [])
             
-            # Apply generation params from file if present
             if 'generation_params' in data:
                 params = data['generation_params']
                 self.temperature = params.get('temperature', self.temperature)
@@ -148,7 +140,6 @@ class LLMBenchmark:
                 value = first_choice.get("text")
                 if isinstance(value, str) and value:
                     return value
-
         return ""
     
     def check_server_health(self, max_retries: int = 30, retry_delay: int = 2) -> bool:
@@ -185,7 +176,13 @@ class LLMBenchmark:
             for proc in psutil.process_iter(['pid', 'name', 'cmdline']):
                 try:
                     cmdline = proc.info['cmdline']
-                    if cmdline and any('llama' in str(arg).lower() for arg in cmdline):
+                    if not cmdline:
+                        continue
+                    
+                    cmd_str = ' '.join(str(arg).lower() for arg in cmdline)
+                    
+                    # CORREÇÃO 1: Garante que ignora o script Python atual e apanha apenas o servidor llama
+                    if 'llama' in cmd_str and 'benchmark_llm.py' not in cmd_str and 'monitor_resources.py' not in cmd_str:
                         mem = proc.memory_info()
                         memory_info['rss_mb'] = round(mem.rss / (1024 * 1024), 2)
                         memory_info['vms_mb'] = round(mem.vms / (1024 * 1024), 2)
@@ -211,10 +208,10 @@ class LLMBenchmark:
             "n_predict": self.max_tokens,
             "temperature": self.temperature,
             "stream": True,
-            "cache_prompt": True
+            # CORREÇÃO 2: Cache desligada para garantir que o prefill é sempre processado (TTFT válido nas 3 runs)
+            "cache_prompt": False 
         }
         
-        # Initialize metrics
         metrics = {
             'timestamp': datetime.now().isoformat(),
             'model': self.model_name,
@@ -223,7 +220,8 @@ class LLMBenchmark:
             'category': category,
             'mandatory': mandatory,
             'prompt_text_preview': prompt_text[:150] + "...",
-            'input_tokens_est': len(prompt_text.split()),
+            'input_tokens_est': len(prompt_text.split()), # Fallback estimation
+            'input_tokens_real': None,
             'output_tokens': 0,
             'ttft_ms': 0,
             'tpot_values_ms': [],
@@ -240,7 +238,6 @@ class LLMBenchmark:
             'error': None
         }
         
-        # Timing
         request_start = time.perf_counter()
         first_token_time = None
         last_token_time = None
@@ -259,7 +256,6 @@ class LLMBenchmark:
                 metrics['error'] = f"HTTP {response.status_code}"
                 return metrics
             
-            # Process streaming tokens
             for line in response.iter_lines(decode_unicode=True):
                 if not line:
                     continue
@@ -273,6 +269,9 @@ class LLMBenchmark:
                     continue
                 
                 if data.get('stop', False):
+                    # CORREÇÃO 3: Capturar o número real de tokens reportado pelo servidor llama.cpp
+                    if 'timings' in data:
+                        metrics['input_tokens_real'] = data['timings'].get('prompt_n')
                     break
 
                 chunk_text = self._extract_response_text(data)
@@ -290,12 +289,13 @@ class LLMBenchmark:
                 
                 last_token_time = current_time
             
-            # Calculate final metrics
             end_time = time.perf_counter()
             metrics['total_time_ms'] = round((end_time - request_start) * 1000, 2)
             metrics['output_tokens'] = len(token_intervals) + 1
             
-            # Calculate TPOT statistics
+            # Use real tokens if available, else fallback to estimation
+            real_input_tokens = metrics['input_tokens_real'] if metrics['input_tokens_real'] else metrics['input_tokens_est']
+            
             if token_intervals:
                 metrics['tpot_values_ms'] = [round(t, 2) for t in token_intervals]
                 metrics['tpot_avg_ms'] = round(statistics.mean(token_intervals), 2)
@@ -305,23 +305,19 @@ class LLMBenchmark:
                 decode_time_sec = sum(token_intervals) / 1000
                 metrics['decode_throughput_tps'] = round(metrics['output_tokens'] / decode_time_sec, 2) if decode_time_sec > 0 else 0
             
-            # Prefill throughput
             if metrics['ttft_ms'] > 0:
                 prefill_time_sec = metrics['ttft_ms'] / 1000
-                metrics['prefill_throughput_tps'] = round(metrics['input_tokens_est'] / prefill_time_sec, 2)
+                metrics['prefill_throughput_tps'] = round(real_input_tokens / prefill_time_sec, 2)
             
-            # Overall throughput
             if metrics['total_time_ms'] > 0:
                 total_time_sec = metrics['total_time_ms'] / 1000
-                total_tokens = metrics['input_tokens_est'] + metrics['output_tokens']
+                total_tokens = real_input_tokens + metrics['output_tokens']
                 metrics['overall_throughput_tps'] = round(total_tokens / total_time_sec, 2)
             
-            # Memory
             mem_info = self.get_memory_usage()
             metrics['memory_rss_mb'] = mem_info['rss_mb']
             metrics['memory_vms_mb'] = mem_info['vms_mb']
             
-            # Store truncated output
             metrics['generated_text'] = generated_text[:300]
             
             self.logger.info(f"✓ {prompt_id}: TTFT={metrics['ttft_ms']}ms, "
@@ -340,7 +336,6 @@ class LLMBenchmark:
     def run_warmup(self):
         """Run warmup requests."""
         self.logger.info("Running warmup...")
-        
         warmup_prompts = [
             {"text": "Hello, how are you?"},
             {"text": "What is 2+2?"},
@@ -354,7 +349,6 @@ class LLMBenchmark:
             prompt['mandatory'] = False
             self.run_completion(prompt)
             time.sleep(0.3)
-        
         self.logger.info("Warmup complete\n")
     
     def run_benchmark(self, num_trials: int = 3):
@@ -363,27 +357,20 @@ class LLMBenchmark:
         self.logger.info(f"BENCHMARK: {self.model_name} ({num_trials} trials)")
         self.logger.info(f"{'='*60}\n")
         
-        # Get memory before starting
         mem_before = self.get_memory_usage()
         self.logger.info(f"Memory before benchmark: {mem_before['rss_mb']:.1f} MB RSS")
         
         all_results = []
-        
         for trial in range(num_trials):
             self.logger.info(f"\n--- Trial {trial + 1}/{num_trials} ---")
-            
             trial_results = []
             
-            for i, prompt in enumerate(self.prompts):
-                # Run completion
+            for prompt in self.prompts:
                 metrics = self.run_completion(prompt)
                 metrics['trial'] = trial + 1
                 trial_results.append(metrics)
-                
-                # Brief pause between requests
                 time.sleep(0.3)
             
-            # Save trial results
             trial_file = self.results_dir / f"trial_{trial + 1}.json"
             with open(trial_file, 'w') as f:
                 json.dump(trial_results, f, indent=2)
@@ -391,31 +378,26 @@ class LLMBenchmark:
             
             all_results.extend(trial_results)
         
-        # Save all raw results
         raw_file = self.results_dir / "raw_results.json"
         with open(raw_file, 'w') as f:
             json.dump(all_results, f, indent=2)
         
-        # Compute and save aggregated statistics
         self.results = all_results
         self._compute_statistics()
-        
         self.logger.info(f"\n✓ Benchmark complete. Results in: {self.results_dir}")
     
     def _compute_statistics(self):
         """Compute and save aggregated statistics."""
         from collections import defaultdict
         
-        # Group by prompt_id
         grouped = defaultdict(list)
         for r in self.results:
             if not r.get('error'):
                 grouped[r['prompt_id']].append(r)
 
-        SLA_TTFT_MS = 2000  # Example: 2 seconds
-        SLA_TPOT_MS = 100   # Example: 100 ms per token
+        SLA_TTFT_MS = 2000
+        SLA_TPOT_MS = 100
                 
-        # Compute statistics per prompt
         stats = []
         for prompt_id, results in grouped.items():
             if not results:
@@ -427,7 +409,6 @@ class LLMBenchmark:
             goodput_count = sum(1 for r in results if r['ttft_ms'] < SLA_TTFT_MS and r['tpot_avg_ms'] < SLA_TPOT_MS)
             goodput_percentage = round((goodput_count / len(results)) * 100, 2)
             
-            # Extract values
             ttft_vals = [r['ttft_ms'] for r in results if r['ttft_ms'] > 0]
             tpot_vals = [r['tpot_avg_ms'] for r in results if r['tpot_avg_ms'] > 0]
             decode_vals = [r['decode_throughput_tps'] for r in results if r['decode_throughput_tps'] > 0]
@@ -451,12 +432,10 @@ class LLMBenchmark:
             }
             stats.append(stat)
         
-        # Save as JSON
         stats_file = self.results_dir / "statistics.json"
         with open(stats_file, 'w') as f:
             json.dump(stats, f, indent=2)
         
-        # Save as CSV
         csv_file = self.results_dir / "statistics.csv"
         if stats:
             fieldnames = [
@@ -471,9 +450,7 @@ class LLMBenchmark:
                 writer.writeheader()
                 writer.writerows(stats)
         
-        # Print summary
         self._print_summary(stats)
-        
         self.logger.info(f"Statistics saved to {stats_file} and {csv_file}")
     
     def _print_summary(self, stats: List[Dict]):
@@ -515,51 +492,24 @@ class LLMBenchmark:
 
 
 def main():
-    """Main entry point - called from SLURM script."""
     parser = argparse.ArgumentParser(
         description="LLM Inference Benchmark for llama.cpp - Track A1",
-        formatter_class=argparse.RawDescriptionHelpFormatter,
-        epilog="""
-Examples:
-  # From project root
-  python scripts/benchmark_llm.py --model llama-3.1-8b --threads 16
-  
-  # With specific trials and custom server
-  python scripts/benchmark_llm.py --model qwen2.5-1.5b --threads 8 --trials 3 --port 8081
-  
-  # Minimal run for testing
-  python scripts/benchmark_llm.py --model tinyllama-1.1b --threads 4 --trials 1 --no-warmup
-        """
+        formatter_class=argparse.RawDescriptionHelpFormatter
     )
     
-    # Required arguments
-    parser.add_argument('--model', type=str, required=True,
-                       help='Model name (e.g., llama-3.1-8b, qwen2.5-1.5b)')
-    
-    # Optional arguments with sensible defaults
-    parser.add_argument('--project-root', type=str, default='.',
-                       help='Project root directory (default: current dir)')
-    parser.add_argument('--threads', type=int, default=16,
-                       help='Number of CPU threads used by server (default: 16)')
-    parser.add_argument('--trials', type=int, default=3,
-                       help='Number of trials per prompt (default: 3)')
-    parser.add_argument('--port', type=int, default=8080,
-                       help='Server port (default: 8080)')
-    parser.add_argument('--host', type=str, default='localhost',
-                       help='Server host (default: localhost)')
-    parser.add_argument('--max-tokens', type=int, default=512,
-                       help='Maximum tokens to generate (default: 512)')
-    parser.add_argument('--temperature', type=float, default=0.7,
-                       help='Sampling temperature (default: 0.7)')
-    parser.add_argument('--no-warmup', action='store_true',
-                       help='Skip warmup phase')
+    parser.add_argument('--model', type=str, required=True, help='Model name (e.g., llama-3.1-8b, qwen2.5-1.5b)')
+    parser.add_argument('--project-root', type=str, default='.', help='Project root directory')
+    parser.add_argument('--threads', type=int, default=16, help='Number of CPU threads used by server')
+    parser.add_argument('--trials', type=int, default=3, help='Number of trials per prompt')
+    parser.add_argument('--port', type=int, default=8080, help='Server port')
+    parser.add_argument('--host', type=str, default='localhost', help='Server host')
+    parser.add_argument('--max-tokens', type=int, default=512, help='Maximum tokens to generate')
+    parser.add_argument('--temperature', type=float, default=0.7, help='Sampling temperature')
+    parser.add_argument('--no-warmup', action='store_true', help='Skip warmup phase')
     
     args = parser.parse_args()
     
-    # Build server URL
     server_url = f"http://{args.host}:{args.port}"
-    
-    # Resolve project root
     project_root = Path(args.project_root).resolve()
     
     print(f"\n{'='*60}")
@@ -573,7 +523,6 @@ Examples:
     print(f"Max tokens:   {args.max_tokens}")
     print(f"{'='*60}\n")
     
-    # Create benchmark instance
     benchmark = LLMBenchmark(
         model_name=args.model,
         project_root=str(project_root),
@@ -584,17 +533,17 @@ Examples:
     )
     
     # -----------------------------------------------------------------
-    # MLflow Setup
+    # MLflow Setup (Atualizado com log_system_metrics=True)
     # -----------------------------------------------------------------
     db_path = project_root / "llm_benchmarks.db"
     mlflow.set_tracking_uri(f"sqlite:///{db_path}")
     mlflow.set_experiment("Track_A1_LLM_Benchmarks")
     
-    run_name = f"{args.model}_{args.threads}threads"
+    run_name = f"{args.model}_{args.threads}threads_{datetime.now().strftime('%b%d_%H-%M-%S')}"
     
-    with mlflow.start_run(run_name=run_name):
+    # CORREÇÃO 4: Ativar o log das métricas de sistema no MLflow e registar a run corretamente
+    with mlflow.start_run(run_name=run_name, log_system_metrics=True):
         
-        # Log basic configuration to MLflow
         mlflow.log_params({
             "model_name": args.model,
             "threads": args.threads,
@@ -603,17 +552,13 @@ Examples:
             "temperature": args.temperature
         })
 
-        # Check server
         if not benchmark.check_server_health():
             print("\nERROR: llama.cpp server is not running!")
-            print(f"Start it with: llama-server -m models/<model>.gguf -c 4096 -t {args.threads}")
             sys.exit(1)
         
-        # Warmup
         if not args.no_warmup:
             benchmark.run_warmup()
         
-        # Run benchmark
         try:
             benchmark.run_benchmark(num_trials=args.trials)
         except KeyboardInterrupt:
@@ -626,7 +571,6 @@ Examples:
             import traceback
             traceback.print_exc()
             sys.exit(1)
-
 
 if __name__ == '__main__':
     main()
