@@ -58,11 +58,11 @@ This is part of the complete suite. Individual runs are orchestrated by the main
 
 **Output directories**:
 ```
-results/llama-3.1-8b-threads-4/statistics.json
-results/llama-3.1-8b-threads-8/statistics.json
-results/llama-3.1-8b-threads-16/statistics.json
-results/llama-3.1-8b-threads-32/statistics.json
-results/llama-3.1-8b-threads-48/statistics.json
+results/llama-3.1-8b-threads-4/statistics.csv
+results/llama-3.1-8b-threads-8/statistics.csv
+results/llama-3.1-8b-threads-16/statistics.csv
+results/llama-3.1-8b-threads-32/statistics.csv
+results/llama-3.1-8b-threads-48/statistics.csv
 ```
 
 **Key metrics** (per prompt):
@@ -149,7 +149,6 @@ sbatch scripts/run_analyser_2.sh
 │   └── benchmark_prompts.json         # 30 benchmark prompts (short/medium/long)
 ├── scripts/
 │   ├── run_benchmark.sh               # Main SLURM job: all experiments
-│   ├── run_decode_length_study.sh     # Decode length sensitivity study
 │   ├── run_llama.sh                   # Build llama.cpp (auto-called)
 │   ├── run_analyser_2.sh              # Run analysis and plot generation
 │   ├── benchmark_llm.py               # Core benchmark client (30 prompts, 3 trials)
