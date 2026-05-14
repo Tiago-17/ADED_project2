@@ -23,7 +23,7 @@ This project requires `llama.cpp` (the inference server). We include a script to
 Build using the project's helper script:
 
 ```bash
-git submodule update --init
+git submodule update --init --recursive
 sbatch scripts/run_llama.sh
 ```
 
