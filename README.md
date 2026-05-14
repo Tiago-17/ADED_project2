@@ -117,33 +117,24 @@ sbatch scripts/run_benchmark.sh
 
 ## Analyzing Results
 
-### Generate Plots and Analysis
+### Generate Plots and Tables
+
+Para gerar automaticamente todos os gráficos e tabelas de comparação, utilize o job SLURM configurado:
 
 ```bash
-python scripts/analyze_results.py \
-    --results-dir results \
-    --all \
-    --model-size-gb 4.6 \
-    --memory-bw-gbs 1.0
+sbatch scripts/run_analyser_2.sh
 ```
 
-**Output plots** (in `results/plots/`):
-- `*_ttft_vs_threads.png`: Time to first token scaling
-- `*_throughput_vs_threads.png`: Throughput vs. thread count
-- `*_tpot_vs_threads.png`: Token generation latency scaling
-- `*_performance_model.png`: Predicted vs. observed TPOT
-- `*_resource_dashboard.png`: Memory and CPU utilization
-- `*_memory_vs_threads.png`: Peak memory scaling
+**Output plots** (em `results/plots/report/`):
+- `thread_scaling.png`: Escalonamento de TTFT, TPOT, Throughput e Memória consoante o número de threads.
+- `model_comparison.png`: Comparação das várias métricas entre diferentes modelos (Llama-3.1, Qwen2.5, TinyLlama).
+- `quantization_comparison.png`: Efeito da quantização (Q4_K_M vs Q8_0) no TPOT e uso de Memória.
+- `tpot_observed_vs_predicted.png`: Validação do modelo de performance teórico face aos resultados reais.
+- `memory_overview.png`: Gráfico horizontal com os picos de memória por modelo.
 
-### Analyze Single Model
-
-```bash
-python scripts/analyze_results.py \
-    --results-dir results \
-    --model llama-3.1-8b-threads-32 \
-    --model-size-gb 4.6 \
-    --memory-bw-gbs 1.0
-```
+**Output tables** (em `results/tables/`):
+- O script gera representações em `.csv`, `.md` e código `.typ` (Typst) para ser facilmente incluído em relatórios.
+- Tabelas geradas: `thread_scaling`, `model_comparison`, `quantization`, `model_summary`, e `tpot_validation`.
 
 ---
 
@@ -159,14 +150,18 @@ python scripts/analyze_results.py \
 │   ├── run_benchmark.sh               # Main SLURM job: all experiments
 │   ├── run_decode_length_study.sh     # Decode length sensitivity study
 │   ├── run_llama.sh                   # Build llama.cpp (auto-called)
+│   ├── run_analyser_2.sh              # Run analysis and plot generation
 │   ├── benchmark_llm.py               # Core benchmark client (30 prompts, 3 trials)
 │   ├── monitor_resources.py           # Resource monitoring (CPU, memory)
-│   └── analyze_results.py             # Plot generation and analysis
+│   ├── analyze_results.py             # Legacy plot generation
+│   └── analyze_results_2.py           # Core results analyzer (plots & tables)
 ├── results/                           # Benchmark outputs
 │   ├── llama-3.1-8b-threads-4/
-│   │   ├── statistics.json            # Aggregated metrics per prompt
+│   │   ├── statistics.csv             # Aggregated metrics per prompt
 │   │   ├── raw_results.json           # Individual request data
 │   │   └── llama-3.1-8b-threads-4_*.csv  # CPU/memory traces
-│   └── plots/                         # Generated analysis plots
+│   ├── plots/
+│   │   └── report/                    # Generated analysis plots
+│   └── tables/                        # Generated tables (.csv, .md, .typ)
 └── logs/                              # SLURM job logs and server logs
 ```
