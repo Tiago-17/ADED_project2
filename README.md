@@ -140,7 +140,6 @@ python scripts/analyze_results.py \
 
 ```
 .
-├── README.md                          # This file
 ├── requirements_arm.txt               # Python dependencies for ARM
 ├── models/                            # GGUF model files (download manually)
 ├── prompts/
