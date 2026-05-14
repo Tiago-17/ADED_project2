@@ -75,7 +75,7 @@ results/llama-3.1-8b-threads-48/statistics.json
 
 ---
 
-### Experiment 4: Model Comparison (Multi-Model Analysis)
+### Experiment 3: Model Comparison (Multi-Model Analysis)
 
 Part of the complete suite. Compares llama-3.1-8b, qwen2.5-0.5b, and tinyllama-1.1b:
 
@@ -89,6 +89,30 @@ sbatch scripts/run_benchmark.sh
 - TinyLlama-1.1B (Q4_K_M)
 
 **Configuration**: 32 threads, 3 trials per model
+
+---
+
+### Experiment 4: Quantization Comparison
+
+Measure the impact of different quantization levels on inference latency (TPOT) and peak memory usage:
+
+```bash
+sbatch scripts/run_benchmark.sh
+```
+
+This is executed as part of the complete benchmark suite. The analysis compares the 4-bit and 8-bit quantized versions of the Llama-3.1-8B model.
+
+**Models tested**:
+- Meta-Llama-3.1-8B-Instruct (Q4_K_M)
+- Meta-Llama-3.1-8B-Instruct (Q8_0)
+
+**Configuration**: 32 threads (fastest configuration), 3 trials per model.
+
+**Output directories**:
+```
+results/llama-3.1-8b-threads-32/statistics.csv
+results/llama-3.1-8b-Q8/statistics.csv
+```
 
 ---
 
