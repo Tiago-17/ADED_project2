@@ -96,22 +96,22 @@ sbatch scripts/run_benchmark.sh
 
 ### Generate Plots and Tables
 
-Para gerar automaticamente todos os gráficos e tabelas de comparação, utilize o job SLURM configurado:
+To automatically generate all comparison plots and tables, use the configured SLURM job:
 
 ```bash
 sbatch scripts/run_analyser_2.sh
 ```
 
-**Output plots** (em `results/plots/report/`):
-- `thread_scaling.png`: Escalonamento de TTFT, TPOT, Throughput e Memória consoante o número de threads.
-- `model_comparison.png`: Comparação das várias métricas entre diferentes modelos (Llama-3.1, Qwen2.5, TinyLlama).
-- `quantization_comparison.png`: Efeito da quantização (Q4_K_M vs Q8_0) no TPOT e uso de Memória.
-- `tpot_observed_vs_predicted.png`: Validação do modelo de performance teórico face aos resultados reais.
-- `memory_overview.png`: Gráfico horizontal com os picos de memória por modelo.
+**Output plots** (in `results/plots/report/`):
+- `thread_scaling.png`: Scaling of TTFT, TPOT, Throughput, and Memory based on thread count.
+- `model_comparison.png`: Comparison of various metrics across different models (Llama-3.1, Qwen2.5, TinyLlama).
+- `quantization_comparison.png`: Effect of quantization (Q4_K_M vs Q8_0) on TPOT and Memory usage.
+- `tpot_observed_vs_predicted.png`: Validation of the theoretical performance model against actual results.
+- `memory_overview.png`: Horizontal bar chart showing peak memory per model.
 
-**Output tables** (em `results/tables/`):
-- O script gera representações em `.csv`, `.md` e código `.typ` (Typst) para ser facilmente incluído em relatórios.
-- Tabelas geradas: `thread_scaling`, `model_comparison`, `quantization`, `model_summary`, e `tpot_validation`.
+**Output tables** (in `results/tables/`):
+- The script generates representations in `.csv`, `.md`, and `.typ` (Typst) code so they can be easily included in reports.
+- Generated tables: `thread_scaling`, `model_comparison`, `quantization`, `model_summary`, and `tpot_validation`.
 
 ---
 
