@@ -13,11 +13,6 @@
    - Create Python virtual environment (`env-spark`)
    - Install all dependencies from `requirements_arm.txt`
    - Download all required GGUF models from HuggingFace
-   
-   Check the setup progress:
-   ```bash
-   tail -f logs/setup_*.out
-   ```
 
 ---
 
