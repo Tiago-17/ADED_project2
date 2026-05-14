@@ -73,29 +73,6 @@ results/llama-3.1-8b-threads-48/statistics.json
 
 ---
 
-### Experiment 3: Decode Length Sensitivity Study
-
-Measure TPOT stability across different max generation lengths (64, 128, 256, 512 tokens):
-
-```bash
-sbatch scripts/run_decode_length_study.sh
-```
-
-**What it does**:
-- Runs llama-3.1-8b with 32 threads (fastest config)
-- Varies `--max-tokens` parameter: 64, 128, 256, 512
-- 3 trials per configuration for statistical robustness
-- Generates TPOT stability plots
-- Results stored in `results/llama-3.1-8b-max_tokens_<SIZE>/`
-
-**Output directories**:
-```
-results/llama-3.1-8b-max_tokens_64/statistics.json
-results/llama-3.1-8b-max_tokens_128/statistics.json
-results/llama-3.1-8b-max_tokens_256/statistics.json
-results/llama-3.1-8b-max_tokens_512/statistics.json
-```
-
 ---
 
 ### Experiment 4: Model Comparison (Multi-Model Analysis)

@@ -11,9 +11,6 @@
 
 set -euo pipefail
 
-# =========================================================
-# 1. Bulletproof Path Resolution
-# =========================================================
 if [ -d "$SLURM_SUBMIT_DIR/llama.cpp" ]; then
     PROJECT_ROOT="$SLURM_SUBMIT_DIR"
 else
@@ -30,9 +27,6 @@ echo "Starting Master Benchmark Pipeline"
 echo "Project Root: $PROJECT_ROOT"
 echo "================================================="
 
-# =========================================================
-# 2. Load Modules & OpenSSL
-# =========================================================
 echo "Loading modules..."
 if command -v module >/dev/null 2>&1; then
     module purge
@@ -47,9 +41,6 @@ if [[ -d "$OPENSSL_FALLBACK_DIR" ]]; then
     export LD_LIBRARY_PATH="$OPENSSL_FALLBACK_DIR:${LD_LIBRARY_PATH:-}"
 fi
 
-# =========================================================
-# 3. Activate Python Environment & Check Binaries
-# =========================================================
 if [ ! -f "$PROJECT_ROOT/env-spark/bin/activate" ]; then
     echo "ERROR: Virtual environment not found. Did you run setup_project.sh?"
     exit 1
@@ -64,9 +55,6 @@ fi
 
 SERVER_PORT=8080
 
-# =========================================================
-# EXPERIMENT HELPER FUNCTION
-# =========================================================
 run_experiment() {
     local model_file=$1
     local run_name=$2
@@ -76,11 +64,11 @@ run_experiment() {
 
     echo ""
     echo "-------------------------------------------------"
-    echo "🚀 RUNNING EXPERIMENT: $run_name (Threads: $threads)"
+    echo " RUNNING EXPERIMENT: $run_name (Threads: $threads)"
     echo "-------------------------------------------------"
 
     if [[ ! -f "$model_path" ]]; then
-        echo "⚠️  WARNING: Model $model_file not found. Skipping $run_name..."
+        echo "  WARNING: Model $model_file not found. Skipping $run_name..."
         return 0
     fi
 
@@ -103,7 +91,7 @@ run_experiment() {
 
     # 3. Verify server didn't crash
     if ! kill -0 $server_pid 2>/dev/null; then
-        echo "❌ ERROR: llama-server crashed! Check logs/server_${run_name}.log"
+        echo "ERROR: llama-server crashed! Check logs/server_${run_name}.log"
         kill $monitor_pid 2>/dev/null || true
         return 1
     fi
@@ -116,7 +104,7 @@ run_experiment() {
         --project-root "$PROJECT_ROOT" \
         --threads $threads \
         --port $SERVER_PORT \
-        --trials 3 || echo "⚠️  Benchmark script encountered a non-fatal error."
+        --trials 3 || echo "Benchmark script encountered a non-fatal error."
 
     # 5. Cleanup
     echo "Cleaning up processes for $run_name..."
@@ -127,35 +115,29 @@ run_experiment() {
     
     # Wait to ensure the port is completely freed before the next loop
     sleep 5 
-    echo "✅ Finished $run_name"
+    echo "Finished $run_name"
 }
 
-# =========================================================
-# PHASE 1: Threading Dimension (Llama 3.1 8B Q4)
-# =========================================================
+
+# Test 1: Threading Dimension (Llama 3.1 8B Q4)
 THREADS_TO_TEST=(4 8 16 32 48)
 for t in "${THREADS_TO_TEST[@]}"; do
     run_experiment "meta-llama-3.1-8b-instruct-q4_k_m.gguf" "llama-3.1-8b-threads-$t" $t
 done
 
-# =========================================================
-# PHASE 2: Other Required Models (Qwen & TinyLlama)
-# =========================================================
+# Test 2: Other Models (Qwen & TinyLlama)
 run_experiment "qwen2.5-0.5b-instruct-q4_k_m.gguf" "qwen2.5-0.5b" 32
 run_experiment "tinyllama-1.1b-chat-v1.0-q4_k_m.gguf" "tinyllama-1.1b" 32
 
-# =========================================================
-# PHASE 3: Quantization Dimension (Llama 3.1 8B Q8)
-# =========================================================
+
+# Test 3: Quantization Dimension (Llama 3.1 8B Q8)
 run_experiment "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "llama-3.1-8b-Q8" 32
 
-# =========================================================
-# PHASE 4: Analysis & Graph Generation
-# =========================================================
+# Analysis & Graph Generation
 echo ""
 echo "================================================="
-echo "📊 GENERATING PLOTS AND PERFORMANCE MODEL"
-echo "================================================="]
+echo " GENERATING PLOTS AND PERFORMANCE MODEL"
+echo "================================================="
 
 source "$ENV_DIR/bin/activate"
 
@@ -167,6 +149,6 @@ python "$SCRIPT_DIR/analyze_results.py" \
     --memory-bw-gbs 1024.0
 
 echo "================================================="
-echo "🎉 ALL BENCHMARKS AND PLOTS COMPLETE! 🎉"
+echo "ALL BENCHMARKS AND PLOTS COMPLETE!"
 echo "Check the results/plots/ directory for your graphs."
 echo "================================================="
