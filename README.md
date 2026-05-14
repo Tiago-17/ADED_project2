@@ -20,7 +20,7 @@
 
 This project requires `llama.cpp` (the inference server). We include a script to build the server in this repository.
 
-Option A — build using the project's helper script (recommended):
+Build using the project's helper script:
 
 ```bash
 git submodule update --init
