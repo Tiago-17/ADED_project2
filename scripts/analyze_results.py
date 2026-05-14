@@ -20,7 +20,7 @@ import math
 
 # Visualization imports
 import matplotlib
-matplotlib.use('Agg')  # Non-interactive backend for HPC
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
@@ -823,7 +823,6 @@ Examples:
             'memory_bandwidth_gbs': args.memory_bw_gbs
         })
 
-    # 2. Trigger the appropriate plotting functions based on arguments
     if args.all:
         analyzer.generate_all_plots(model_name=args.model, model_params=model_params)
     elif args.compare_models:
@@ -836,6 +835,5 @@ Examples:
         parser.print_help()
         print("\nERROR: Please specify an action like --all, --compare-models, or --model <name>")
 
-# 3. Actually execute the main function
 if __name__ == "__main__":
     main()

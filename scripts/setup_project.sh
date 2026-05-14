@@ -24,7 +24,7 @@ MODELS_DIR="$PROJECT_ROOT/models"
 mkdir -p "$PROJECT_ROOT/logs"
 
 echo "================================================="
-echo "PHASE 1: Setting up Python Virtual Environment"
+echo " Setting up Python Virtual Environment"
 echo "================================================="
 
 if command -v module >/dev/null 2>&1; then
@@ -50,7 +50,7 @@ pip install --upgrade pip
 pip install --no-cache-dir -r "$PROJECT_ROOT/requirements_arm.txt"
 
 echo "================================================="
-echo "PHASE 2: Downloading Models"
+echo " Downloading Models"
 echo "================================================="
 
 mkdir -p "$MODELS_DIR"
@@ -70,20 +70,20 @@ download_model() {
     fi
 }
 
-# 1. Llama 3.1 8B (Q4_K_M) - Track A1 Baseline
+# 1. Llama 3.1 8B (Q4_K_M)
 download_model "https://huggingface.co/joshnader/Meta-Llama-3.1-8B-Instruct-Q4_K_M-GGUF/resolve/main/meta-llama-3.1-8b-instruct-q4_k_m.gguf" "meta-llama-3.1-8b-instruct-q4_k_m.gguf"
 
-# 2. Qwen 2.5 0.5B (Q4_K_M) - Extra Model
+# 2. Qwen 2.5 0.5B (Q4_K_M)
 download_model "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF/resolve/main/qwen2.5-0.5b-instruct-q4_k_m.gguf" "qwen2.5-0.5b-instruct-q4_k_m.gguf"
 
-# 3. TinyLlama 1.1B (Q4_K_M) - Extra Model
+# 3. TinyLlama 1.1B (Q4_K_M)
 download_model "https://huggingface.co/hieupt/TinyLlama-1.1B-Chat-v1.0-Q4_K_M-GGUF/resolve/main/tinyllama-1.1b-chat-v1.0-q4_k_m.gguf" "tinyllama-1.1b-chat-v1.0-q4_k_m.gguf"
 
-# 4. Llama 3.1 8B (Q8_0) - Required for Dimension 3 (Quantization exploration)
+# 4. Llama 3.1 8B (Q8_0)
 download_model "https://huggingface.co/bartowski/Meta-Llama-3.1-8B-Instruct-GGUF/resolve/main/Meta-Llama-3.1-8B-Instruct-Q8_0.gguf" "Meta-Llama-3.1-8B-Instruct-Q8_0.gguf"
 
 echo "================================================="
-echo "✓ Project Setup Complete!"
+echo "Project Setup Complete!"
 echo "All models are saved in: $MODELS_DIR"
 echo "To run your benchmark, execute:"
 echo "sbatch scripts/run_benchmark.sh"
