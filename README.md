@@ -23,21 +23,9 @@ This project requires `llama.cpp` (the inference server). You can either use the
 Option A — build using the project's helper script (recommended):
 
 ```bash
+git submodule update --init
 sbatch scripts/run_llama.sh
 ```
-
-Option B — manual clone & build:
-
-```bash
-git clone --depth 1 https://github.com/ggerganov/llama.cpp.git llama.cpp
-cd llama.cpp
-cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DLLAMA_BUILD_SERVER=ON
-cmake --build build --target llama-server -j"$(nproc)"
-```
-
-The `run_*` scripts expect the server binary at `llama.cpp/build/bin/llama-server`.
-
----
 
 ## Running Experiments
 
