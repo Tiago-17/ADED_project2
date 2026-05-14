@@ -18,7 +18,7 @@
 
 ### Obtain and build `llama.cpp`
 
-This project requires `llama.cpp` (the inference server). You can either use the provided build helper or clone and build it manually.
+This project requires `llama.cpp` (the inference server). We include a script to build the server in this repository.
 
 Option A — build using the project's helper script (recommended):
 
