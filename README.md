@@ -4,9 +4,7 @@
 
 ### Prerequisites
 
-1. **HPC Access**: Access to an SLURM-based HPC cluster with ARM nodes
-
-2. **Setup Project** (one-time):
+1. **Setup Project** (one-time):
    ```bash
    sbatch scripts/setup_project.sh
    ```
