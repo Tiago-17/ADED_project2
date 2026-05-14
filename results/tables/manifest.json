@@ -1,0 +1,20 @@
+{
+  "results_dir": "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results",
+  "tables": [
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/thread_scaling.csv",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/thread_scaling.md",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/thread_scaling.typ",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_comparison.csv",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_comparison.md",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_comparison.typ",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/quantization.csv",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/quantization.md",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/quantization.typ",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_summary.csv",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_summary.md",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/model_summary.typ",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/tpot_validation.csv",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/tpot_validation.md",
+    "/projects/F202500010HPCVLABUMINHO/uminhocp057/ADED/ADED_project2/results/tables/tpot_validation.typ"
+  ]
+}
